@@ -49,10 +49,10 @@ YAHOO.namespace("qMock.unitTests");
 		
 		testMockExisting: function() {
 			mock = new Mock(myObj);
-			myObj.expects('alert_hooray').times(2).with('some param').returns('a string');
-			myObj.alert_hooray(1,2,3,4,5,6);
-			//myObj.verify();
-		    //assert(mockControl.verify(), "verify() should pass after swing called");
+			myObj.expects('alert_hooray').once().with(1,2).returns('a string');
+			myObj.alert_hooray(1,2,3);
+			//myObj.alert_hooray(1,2,3);
+		    assert(myObj.verify(), "object verification passed");
 		}
 	});
  
