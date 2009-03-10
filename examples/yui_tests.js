@@ -119,10 +119,18 @@ function obj_the_same (firstObj, secondObj) {
 }
 
 
-myObj = {
+
+
+function Something(){};
+Something.prototype = {
 	alert_hooray: function(){alert('hooray!')},
 	alert_boo: function(){alert('boo!')}
 };
+Something.prototype.constructor = Something;
+o = new Something();
+console.log(o.constructor);
+
+
 
 
 YAHOO.namespace("qMock.unitTests");
@@ -135,14 +143,13 @@ YAHOO.namespace("qMock.unitTests");
 		},
 		
 		testMockExisting: function() {
-			mock = new Mock(myObj);
+			//myObj = new Something();
+			myObj = new Mock(new Something());
 			myObj.expects('alert_hooray').once().with(1,2).returns('a string');
 			myObj.expects('alert_boo').once().with('skdfsd').returns('a string');
-			myObj.alert_hooray(1,2);
-			//myObj.alert_hooray(1,2);
+			myObj.alert_hooray(1,22);
 			myObj.alert_boo('skdfsd');
-			//myObj.alert_hooray(1,2,3);
-		    assert(mock.verify(), "object verification passed");
+		    assert(myObj.jsmocha.verify(), myObj.jsmocha.report());
 		}
 	});
  
