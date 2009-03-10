@@ -1,4 +1,5 @@
 // TODO move this to a better place
+// TODO better reporting of complex objects for parameters matcher
 object_to_array = function(o) {
 	var a = new Array();
 	for(var i = 0; i < o.length; i++){
@@ -6,9 +7,3 @@ object_to_array = function(o) {
 	}
 	return a;
 }
-
-Object.prototype.getName = function() { 
-   var funcNameRegex = /function (.{1,})\(/;
-   var results = (funcNameRegex).exec((this).constructor.toString());
-   return (results && results.length > 1) ? results[1] : "";
-};

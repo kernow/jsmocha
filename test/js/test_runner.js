@@ -11,6 +11,6 @@ YUI().use("console", "yuitest", function(Y) {
 	// Y.Test.Runner.add(jsMochaTests.ExpectationTests(Y));
 	Y.Test.Runner.add(jsMochaTests.ExpectationListTests(Y));
 	Y.Test.Runner.add(jsMochaTests.MockTests(Y));
-	// Y.Test.Runner.add(jsMochaTests.ParametersMatcherTests(Y));
+	Y.Test.Runner.add(jsMochaTests.ParametersMatcherTests(Y));
 	Y.Test.Runner.run();
 });
