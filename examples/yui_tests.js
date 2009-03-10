@@ -145,8 +145,8 @@ YAHOO.namespace("qMock.unitTests");
 		testMockExisting: function() {
 			//myObj = new Something();
 			myObj = new Mock(new Something());
-			myObj.expects('alert_hooray').once().with(1,2).returns('a string');
-			myObj.expects('alert_boo').once().with('skdfsd').returns('a string');
+			myObj.expects('alert_hooray').once().passing(1,2).returns('a string');
+			myObj.expects('alert_boo').once().passing('skdfsd').returns('a string');
 			myObj.alert_hooray(1,22);
 			myObj.alert_boo('skdfsd');
 		    assert(myObj.jsmocha.verify(), myObj.jsmocha.report());

@@ -84,7 +84,7 @@ jsMochaTests.MockTests = function(Y) {
 	
 	testSuite.add(new Y.Test.Case({
 		
-		name: "with",
+		name: "passing",
 		
 		setUp : function () {
 			this.mock = new Mock();
@@ -95,25 +95,25 @@ jsMochaTests.MockTests = function(Y) {
 		},
 		
 		testShouldPassValidation : function () {
-			this.mock.expects('a_method').with('a string');
+			this.mock.expects('a_method').passing('a string');
 			this.mock.a_method('a string');
 			Y.Assert.isTrue(this.mock.jsmocha.verify());
 		},
 		
 		testShouldFailValidationWhenNoParamsPassed : function () {
-			this.mock.expects('a_method').with('a string');
+			this.mock.expects('a_method').passing('a string');
 			this.mock.a_method();
 			Y.Assert.isFalse(this.mock.jsmocha.verify());
 		},
 		
 		testShouldFailValidationWhenDifferentParamsPassed : function () {
-			this.mock.expects('a_method').with('a string');
+			this.mock.expects('a_method').passing('a string');
 			this.mock.a_method('another string');
 			Y.Assert.isFalse(this.mock.jsmocha.verify());
 		},
 		
 		testShouldFailValidationWhenDifferntTypeOfParamsPassed : function () {
-			this.mock.expects('a_method').with('a string');
+			this.mock.expects('a_method').passing('a string');
 			this.mock.a_method([1,2,3]);
 			Y.Assert.isFalse(this.mock.jsmocha.verify());
 		},
@@ -160,7 +160,7 @@ jsMochaTests.MockTests = function(Y) {
 
 	testSuite.add(new Y.Test.Case({
 		
-		name: "with no existing object",
+		name: "passing no existing object",
 		
 		setUp : function () {
 			this.mock = new Mock();
@@ -194,7 +194,7 @@ jsMochaTests.MockTests = function(Y) {
 	
 	testSuite.add(new Y.Test.Case({
 		
-		name: "with existing object",
+		name: "passing existing object",
 		
 		setUp : function () {
 			function AnObject(){

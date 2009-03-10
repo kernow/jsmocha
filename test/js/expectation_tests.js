@@ -30,7 +30,7 @@ jsMochaTests.ExpectationTests = function(Y) {
 		},
 		
 		testShouldPassParamsVerification : function () {
-			this.expectation.with('string');
+			this.expectation.passing('string');
 			this.obj.a_method('string');
 			Y.Assert.isTrue(this.expectation.verify());
 		},
@@ -40,7 +40,7 @@ jsMochaTests.ExpectationTests = function(Y) {
 		},
 		
 		testShouldFailParamsVerification : function () {
-			this.expectation.with('string');
+			this.expectation.passing('string');
 			this.obj.a_method('string 2');
 			Y.Assert.isFalse(this.expectation.verify());
 		},
@@ -53,7 +53,7 @@ jsMochaTests.ExpectationTests = function(Y) {
 		},
 		
 		testShouldFailParamsVerification : function () {
-			this.expectation.with('string');
+			this.expectation.passing('string');
 			this.obj.a_method('string 2');
 			this.expectation.verify();
 			var report_string = "object: AnObject.a_method";
