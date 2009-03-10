@@ -78,9 +78,46 @@ jsMochaTests.MockTests = function(Y) {
 			this.mock.a_method();
 			Y.Assert.isTrue(this.mock.jsmocha.verify());
 		}
+	}));
+	
+	
+	
+	testSuite.add(new Y.Test.Case({
 		
-		// TODO add with tests
-
+		name: "with",
+		
+		setUp : function () {
+			this.mock = new Mock();
+		},
+		
+		tearDown : function () { 
+			delete this.mock;
+		},
+		
+		testShouldPassValidation : function () {
+			this.mock.expects('a_method').with('a string');
+			this.mock.a_method('a string');
+			Y.Assert.isTrue(this.mock.jsmocha.verify());
+		},
+		
+		testShouldFailValidationWhenNoParamsPassed : function () {
+			this.mock.expects('a_method').with('a string');
+			this.mock.a_method();
+			Y.Assert.isFalse(this.mock.jsmocha.verify());
+		},
+		
+		testShouldFailValidationWhenDifferentParamsPassed : function () {
+			this.mock.expects('a_method').with('a string');
+			this.mock.a_method('another string');
+			Y.Assert.isFalse(this.mock.jsmocha.verify());
+		},
+		
+		testShouldFailValidationWhenDifferntTypeOfParamsPassed : function () {
+			this.mock.expects('a_method').with('a string');
+			this.mock.a_method([1,2,3]);
+			Y.Assert.isFalse(this.mock.jsmocha.verify());
+		},
+		
 	}));
 	
 	

@@ -128,7 +128,7 @@ Something.prototype = {
 };
 Something.prototype.constructor = Something;
 o = new Something();
-console.log(o.constructor);
+// console.log(o.constructor);
 
 
 
