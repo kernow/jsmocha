@@ -8,12 +8,12 @@ TODO:
 
 - Add stubbing
 - Add better parameter matcher reporting of complex objects
-- Add support for multiple expects with different passing() parameters
+- Add support for multiple expects with different `passing()` parameters
 
 Examples
 --------
 
-jsMocha's syntax is designed to closely match that of Mocha's which is extremely readable and simple. The major difference between Mocha syntax and jsMocha is with() parameter expectations have been changed to passing(), this is due to a naming conflict in JavaScript.
+jsMocha's syntax is designed to closely match that of Mocha's which is extremely readable and simple. The major difference between Mocha syntax and jsMocha is `with()` parameter expectations have been changed to `passing()`, this is due to a naming conflict in JavaScript.
 
 A mocked object has the `expects()` method available and also the jsmocha object. The `verify()`, `report()` and `teardown()` methods are available through the jsmocha object to avoid naming conflicts.
 
@@ -45,13 +45,13 @@ Mock returns the original object passed to it so in the above example `mock` and
 	
 ### Specifying the expected parameters
 
-The `say` method should be called with the parameter string 'hello'
+The `say()` method should be called with the parameter string 'hello'
 
 	greeting.expects('say').passing('hello');
 	
 ### Specifying what the mock should return
 
-The method `say` should return the string 'greeting sent'
+The method `say()` should return the string 'greeting sent'
 
 	greeting.expects('say').returns('greeting sent');
 	
@@ -77,4 +77,4 @@ Returns a report of all failed expectations.
 
 ### Resetting mocked objects, teardown
 
-Object tear down MUST be called explicitly by calling `greeting.jsmocha.report()` or `greeting.jsmocha.teardown()`
+Object tear down MUST be called explicitly by calling `report()` or `teardown()`, in the above example this would be done by calling `greeting.jsmocha.report()` or `greeting.jsmocha.teardown()`
