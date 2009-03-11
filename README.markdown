@@ -78,3 +78,8 @@ Returns a report of all failed expectations.
 ### Resetting mocked objects, teardown
 
 Object tear down MUST be called explicitly by calling `report()` or `teardown()`, in the above example this would be done by calling `greeting.jsmocha.report()` or `greeting.jsmocha.teardown()`
+
+License
+-------
+
+jsMocha is distributed under the [MIT license](http://www.opensource.org/licenses/mit-license.php)
