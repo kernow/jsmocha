@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Basic Node Plugin</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style>
+#demo {
+    background: #999;
+    margin: 1em 0;
+    padding: 1em;
+}
+
+#main #demo a, /* hack around yui.css */
+#demo a {
+    color: blue;
+}
+
+#main #demo a.yui-example-disabled, /* hack around yui.css */
+#demo a.yui-example-disabled {
+    color: #666;
+}
+</style>
+
+<!--end custom header content for this example-->
+
+</head>
+
+<body class=" yui-skin-sam">
+
+<h1>Basic Node Plugin</h1>
+
+<div class="exampleIntro">
+	<p>This example shows how to build a simple <code>node</code> plugin. When the link is disabled, the text is gray and clicking it has no effect.</p>
+<p>Click the button to toggle the disabled state of the link.</p>
+			
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<div id="demo">
+    <a href="http://developer.yahoo.com/yui/3/">YUI 3 Home</a>
+</div>
+
+<button id="yui-example-toggle">enable</button>
+<script type="text/javascript">
+YUI({base:"../../build/", timeout: 10000}).use("node", function(Y) {
+
+    // Example plugin that disables links
+    var LinkDisabler = function(config) {
+        this.init(config);
+    };
+
+    LinkDisabler.NAME = 'linkdisabler';
+    LinkDisabler.NS = 'ld';
+
+    LinkDisabler.CLASSNAME = 'yui-example-disabled';
+
+    LinkDisabler.prototype = {
+        init: function(config) {
+            this.owner = config.owner;
+
+            var disabled = config.disabled || true; // "disable" is configurable
+
+            if (disabled) {
+                this.disable();
+            }
+
+            this.owner.on('click', this.onClick, this);
+        },
+
+        disable: function() {
+            this.owner.addClass(LinkDisabler.CLASSNAME);
+        },
+
+        enable: function() {
+            this.owner.removeClass(LinkDisabler.CLASSNAME);
+        },
+
+        onClick: function(e) {
+            if (this.owner.hasClass(LinkDisabler.CLASSNAME)) {
+                e.preventDefault();         
+            }
+        }
+    };
+
+    // get node and add plugin
+    var node = Y.get('#demo a');
+    node.plug(LinkDisabler);
+
+    // button toggling code
+    var onButtonClick = function(e) {
+        var text = 'disable';
+        if (e.target.get('innerHTML') === 'enable') {
+           node.ld.enable(); 
+        } else {
+           node.ld.disable(); 
+           text = 'enable';
+        }
+
+        e.target.set('innerHTML', text);
+    };
+
+    Y.on('click', onButtonClick, '#yui-example-toggle');
+});
+
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+</body>
+</html>
+<!-- presentbright.corp.yahoo.com uncompressed/chunked Tue Dec  9 15:45:55 PST 2008 -->

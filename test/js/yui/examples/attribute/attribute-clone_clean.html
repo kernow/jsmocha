@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Value Clone Configuration</title>
+
+<style type="text/css">
+/*margin and padding on body element
+  can introduce errors in determining
+  element position and are not recommended;
+  we turn them off as a foundation for YUI
+  CSS treatments. */
+body {
+	margin:0;
+	padding:0;
+}
+</style>
+
+<link type="text/css" rel="stylesheet" href="../../build/cssfonts/fonts-min.css" />
+<script type="text/javascript" src="../../build/yui/yui-min.js"></script>
+
+
+<!--begin custom header content for this example-->
+<style type="text/css">
+    #example-out .entry {
+        font-family:courier;
+        margin-top:2px;
+        margin-left:10px;
+    }
+
+    #example-out .header {
+        font-weight:bold;
+        font-family:arial;
+        color:#8dd5e7;
+        margin-top:10px;
+        margin-bottom:3px;
+        margin-left:0px;
+    }
+
+    #example-out .subheader {
+        font-weight:bold;
+        font-family:arial;
+        color:#EDFF9F;
+    }
+
+    #example-out {
+        margin:5px;
+        border:1px solid #000;
+        color:#ffffff;
+        background-color:#004c6d;
+        overflow:auto;
+        height:35em;
+        padding:2px 5px;
+    }
+</style>
+<script type="text/javascript">
+    YUI.namespace("example");
+    YUI.example.print = function(msg, cl) {
+        var o = document.getElementById("example-out");
+        if (o) {
+            cl = cl || "";
+            o.innerHTML += '<div class="entry ' + cl + '">' + msg + '</div>';
+        }
+    }
+</script>
+
+<!--end custom header content for this example-->
+
+</head>
+
+<body class=" yui-skin-sam">
+
+<h1>Value Clone Configuration</h1>
+
+<div class="exampleIntro">
+	<p>By default, <code>get</code> returns an attribute's value by reference, if the value is an object. For normal use cases this is usually acceptable and avoids the performance cost of cloning the value returned. However if required, attributes can be configured using the <code>clone</code> configuration property to specify one of four clone modes, which <code>get</code> will honor when returning the attribute's value. This example demonstrates how the four clone modes work. 
+			
+</div>
+
+<!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
+
+<div id="example-out"></div>
+
+<script type="text/javascript">
+
+// Get a new YUI instance 
+YUI({base:"../../build/", timeout: 10000}).use("node", "dump", "attribute", function(Y) {
+
+    // Shortcut to print (unrelated to example)
+    var print = YUI.example.print;
+
+    // Setup a custom class with attribute support
+    function MyClass(cfg) {
+        this._initAtts(MyClass.ATTRIBUTES, cfg);
+    }
+
+    // Setup attribute configuration
+    MyClass.ATTRIBUTES = {
+        "A" : {
+            value : {
+                a1 : "a1",
+                a2 : "a2",
+                a3 : {
+                    a3a : "a3a",
+                    a3b : "a3b"
+                }
+            },
+
+            // Deep clone, when returning,
+            // to protect entire object
+            clone : Y.Attribute.CLONE.DEEP
+        },
+ 
+        "B" : {
+            value : {
+                b1 : "b1",
+                b2 : "b2",
+                b3 : {
+                    b3a : "b3a",
+                    b3b : "b3b"
+                }
+            },
+
+            // Shallow clone, when returning, to
+            // protect top level properties
+            clone : Y.Attribute.CLONE.SHALLOW
+        },
+
+        "C" : {
+            value : {
+                c1 : "c1",
+                c2 : "c2",
+                c3 : {
+                    c3a : "c3a",
+                    c3b : "c3b"
+                }
+            },
+
+            // Deep clone when returning, and don't
+            // allow sub-attribute values to be set,
+            // but allow whole value to be set
+            clone : Y.Attribute.CLONE.IMMUTABLE
+        },
+
+        "D" : {
+            value : {
+                d1 : "d1",
+                d2 : "d2",
+                d3 : {
+                    d3a : "d3a",
+                    d3b : "d3b"
+                }
+            },
+
+            // Don't clone value when returning (default)
+            clone : Y.Attribute.CLONE.NONE
+        }
+    };
+
+    Y.augment(MyClass, Y.Attribute);
+
+    var o1 = new MyClass();
+
+    /** Deep Cloned **/
+    var aVal = o1.get("A");
+
+    print("A - Deep Cloned", "header");
+    print("Original Value:", "subheader")
+    print(Y.dump(aVal));
+
+    aVal.a1 = "a1-Mod";
+    aVal.a3.a3b = "a3b-Mod";
+
+    print("Value After Modifying Reference:", "subheader");
+    print(Y.dump(o1.get("A")));
+
+    o1.set("A.a3.a3a", "a3a-Mod");
+
+    print("Value After Setting Sub-Attribute:", "subheader");
+    print(Y.dump(o1.get("A")));
+
+    /** Shallow Cloned **/
+    var bVal = o1.get("B");
+
+    print("B - Shallow Cloned", "header");
+    print("Original Value:", "subheader")
+    print(Y.dump(bVal));
+
+    bVal.b1 = "b1-Mod";
+    bVal.b3.b3b = "b3b-Mod";
+    
+    print("Value After Modifying Reference:", "subheader");
+    print(Y.dump(o1.get("B")));
+
+    o1.set("B.b3.b3a", "b3a-Mod");
+
+    print("Value After Setting Sub-Attribute:", "subheader");
+    print(Y.dump(o1.get("B")));
+    
+    /** Immutable **/
+    var cVal = o1.get("C");
+
+    print("C - Immutable", "header");
+    print("Original Value:", "subheader")
+    print(Y.dump(cVal));
+
+    cVal.c1 = "c1-Mod";
+    cVal.c3.c3b = "c3b-Mod";
+
+    print("Value After Modifying Reference:", "subheader");
+    print(Y.dump(o1.get("C")));
+
+    // NOTE: Attempting to set a sub-attribute
+    // on a DEEP or SHALLOW cloned attribute
+    // is allowed, but prevented on IMMUTABLE
+    // attributes
+
+    o1.set("C.c3.c3a", "c3a-Mod");
+
+    print("Value After Setting Sub-Attribute:", "subheader");
+    print(Y.dump(o1.get("C")));
+
+    /** Default **/
+    var dVal = o1.get("D");
+
+    print("D - No Cloning", "header");
+    print("Original Value:", "subheader")
+    print(Y.dump(dVal));
+
+    dVal.d1 = "d1-Mod";
+    dVal.d3.d3b = "d3b-Mod";
+
+    print("Value After Modifying Reference:", "subheader");
+    print(Y.dump(o1.get("D")));
+
+    o1.set("D.d3.d3a", "d3a-Mod");
+
+    print("Value After Setting Sub-Attribute:", "subheader");
+    print(Y.dump(o1.get("D")));
+});
+</script>
+
+<!--END SOURCE CODE FOR EXAMPLE =============================== -->
+
+</body>
+</html>
+<!-- presentbright.corp.yahoo.com uncompressed/chunked Tue Dec  9 15:45:54 PST 2008 -->

@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns:yui="http://yuilibrary.com/rdf/1.0/yui.rdf#">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<title>API: dd-plugin   (YUI Library)</title>
+
+	<link rel="stylesheet" type="text/css" href="assets/reset-fonts-grids-min.css?stamp=1228866341.52" />
+	<link rel="stylesheet" type="text/css" href="assets/api.css?stamp=1228866341.52" />
+
+    <script type="text/javascript" src="assets/api-js?stamp=1228866341.52"></script>
+    <script type="text/javascript" src="assets/ac-js?stamp=1228866341.52"></script>
+</head>
+
+<body id="yahoo-com">
+
+<div id="doc3" class="yui-t2">
+	<div id="hd">
+        <h1><a href="http://developer.yahoo.com/yui/" title="Yahoo! UI Library">Yahoo! UI Library</a></h1>
+        <h3>dd-plugin&nbsp; <span class="subtitle">3.0.0pr2</span></h3>
+        <a href="./index.html" title="Yahoo! UI Library">Yahoo! UI Library</a> 
+            &gt; <a href="./module_dd-plugin.html" title="dd-plugin">dd-plugin</a>
+                
+                
+        <form onsubmit="return false">
+            <div id="propertysearch">
+                Search: <input autocomplete="off" id="searchinput" />
+                <div id="searchresults">
+                    &nbsp;
+                </div>
+            </div>
+        </form>
+	</div>
+
+	<div id="bd">
+		<div id="yui-main">
+			<div class="yui-b">
+            <form action="#" name="yui-classopts-form" method="get" id="yui-classopts-form">
+                <fieldset>
+                    <legend>Filters</legend>
+                <span class="classopts"><input type="checkbox" name="show_private" id="show_private" /> <label for="show_private">Show Private</label></span>
+                <span class="classopts"><input type="checkbox" name="show_protected" id="show_protected" /> <label for="show_protected">Show Protected</label></span>
+                <span class="classopts"><input type="checkbox" name="show_deprecated" id="show_deprecated" /> <label for="show_deprecated">Show Deprecated</label></span>
+                </fieldset>
+            </form>
+
+                   
+                    <h3>Module: dd-plugin
+                    
+
+
+                    </h3>
+                    <div class="description summary">
+                        This is a simple Drop plugin that can be attached to a Node via the plug method.
+                    </div>
+
+
+
+                <div class="yui-gc">
+                    <div class="yui-u first">
+
+                            <p>This module contains the following classes:</p>
+                            <script>
+                            //var YUI_CLASS_LIST = [{"extends": {"superclass": {"Attribute": "Attribute", "Drag": "Drag", "Base": "Base", "Event.Target": "Event.Target"}, "events": {"Drag": [{"access": "", "deprecated": false, "name": "activeHandleChange"}, {"access": "", "deprecated": false, "name": "bubblesChange"}, {"access": "", "deprecated": false, "name": "clickPixelThreshChange"}, {"access": "", "deprecated": false, "name": "clickTimeThreshChange"}, {"access": "", "deprecated": false, "name": "dataChange"}, {"access": "", "deprecated": false, "name": "drag:addHandle"}, {"access": "", "deprecated": false, "name": "drag:addInvalid"}, {"access": "", "deprecated": false, "name": "drag:afterMouseDown"}, {"access": "", "deprecated": false, "name": "drag:drag"}, {"access": "", "deprecated": false, "name": "drag:drophit"}, {"access": "", "deprecated": false, "name": "drag:dropmiss"}, {"access": "", "deprecated": false, "name": "drag:end"}, {"access": "", "deprecated": false, "name": "drag:enter"}, {"access": "", "deprecated": false, "name": "drag:exit"}, {"access": "", "deprecated": false, "name": "drag:mouseDown"}, {"access": "", "deprecated": false, "name": "drag:over"}, {"access": "", "deprecated": false, "name": "drag:removeHandle"}, {"access": "", "deprecated": false, "name": "drag:removeInvalid"}, {"access": "", "deprecated": false, "name": "drag:start"}, {"access": "", "deprecated": false, "name": "draggingChange"}, {"access": "", "deprecated": false, "name": "dragModeChange"}, {"access": "", "deprecated": false, "name": "dragNodeChange"}, {"access": "", "deprecated": false, "name": "groupsChange"}, {"access": "", "deprecated": false, "name": "handlesChange"}, {"access": "", "deprecated": false, "name": "lockChange"}, {"access": "", "deprecated": false, "name": "moveChange"}, {"access": "", "deprecated": false, "name": "nodeChange"}, {"access": "", "deprecated": false, "name": "offsetNodeChange"}, {"access": "", "deprecated": false, "name": "primaryButtonOnlyChange"}, {"access": "", "deprecated": false, "name": "targetChange"}, {"access": "", "deprecated": false, "name": "useShimChange"}], "Base": [{"access": "", "deprecated": false, "name": "destroy"}, {"access": "", "deprecated": false, "name": "destroyedChange"}, {"access": "", "deprecated": false, "name": "init"}, {"access": "", "deprecated": false, "name": "initializedChange"}]}, "configs": {"Drag": [{"access": "", "deprecated": false, "name": "activeHandle"}, {"access": "", "deprecated": false, "name": "bubbles"}, {"access": "", "deprecated": false, "name": "clickPixelThresh"}, {"access": "", "deprecated": false, "name": "clickTimeThresh"}, {"access": "", "deprecated": false, "name": "data"}, {"access": "", "deprecated": false, "name": "dragging"}, {"access": "", "deprecated": false, "name": "dragMode"}, {"access": "", "deprecated": false, "name": "dragNode"}, {"access": "", "deprecated": false, "name": "groups"}, {"access": "", "deprecated": false, "name": "handles"}, {"access": "", "deprecated": false, "name": "lock"}, {"access": "", "deprecated": false, "name": "move"}, {"access": "", "deprecated": false, "name": "node"}, {"access": "", "deprecated": false, "name": "offsetNode"}, {"access": "", "deprecated": false, "name": "primaryButtonOnly"}, {"access": "", "deprecated": false, "name": "target"}, {"access": "", "deprecated": false, "name": "useShim"}], "Base": [{"access": "", "deprecated": false, "name": "destroyed"}, {"access": "", "deprecated": false, "name": "initialized"}]}, "properties": {"Attribute": [], "Drag": [{"access": "private", "deprecated": false, "name": "_clickTimeout"}, {"access": "private", "deprecated": false, "name": "_dragThreshMet"}, {"access": "private", "deprecated": false, "name": "_endTime"}, {"access": "private", "deprecated": false, "name": "_ev_md"}, {"access": "private", "deprecated": false, "name": "_fromTimeout"}, {"access": "private", "deprecated": false, "name": "_groups"}, {"access": "private", "deprecated": false, "name": "_handles"}, {"access": "private", "deprecated": false, "name": "_ieSelectBack"}, {"access": "private", "deprecated": false, "name": "_invalids"}, {"access": "private", "deprecated": false, "name": "_invalidsDefault"}, {"access": "private", "deprecated": false, "name": "_startTime"}, {"access": "", "deprecated": false, "name": "deltaXY"}, {"access": "", "deprecated": false, "name": "lastXY"}, {"access": "", "deprecated": false, "name": "mouseXY"}, {"access": "", "deprecated": false, "name": "nodeXY"}, {"access": "", "deprecated": false, "name": "region"}, {"access": "", "deprecated": false, "name": "startXY"}, {"access": "", "deprecated": false, "name": "target"}], "Base": [{"access": "", "deprecated": false, "name": "name"}]}, "methods": {"Attribute": [{"access": "private", "deprecated": false, "name": "_cloneAttVal"}, {"access": "private", "deprecated": false, "name": "_defAttSet"}, {"access": "private", "deprecated": false, "name": "_fireAttChange"}, {"access": "private", "deprecated": false, "name": "_getSubAttVal"}, {"access": "protected", "deprecated": false, "name": "_initAtts"}, {"access": "private", "deprecated": false, "name": "_initAttVal"}, {"access": "protected", "deprecated": false, "name": "_set"}, {"access": "private", "deprecated": false, "name": "_setSubAttVal"}, {"access": "private", "deprecated": false, "name": "_splitAttrValues"}, {"access": "", "deprecated": false, "name": "addAtt"}, {"access": "", "deprecated": false, "name": "get"}, {"access": "", "deprecated": false, "name": "getAtts"}, {"access": "", "deprecated": false, "name": "on"}, {"access": "", "deprecated": false, "name": "removeAtt"}, {"access": "", "deprecated": false, "name": "reset"}, {"access": "", "deprecated": false, "name": "set"}, {"access": "", "deprecated": false, "name": "setAtts"}], "Drag": [{"access": "private", "deprecated": false, "name": "_align"}, {"access": "private", "deprecated": false, "name": "_createEvents"}, {"access": "private", "deprecated": false, "name": "_fixDragStart"}, {"access": "private", "deprecated": false, "name": "_fixIEMouseDown"}, {"access": "private", "deprecated": false, "name": "_fixIEMouseUp"}, {"access": "private", "deprecated": false, "name": "_handleMouseDown"}, {"access": "private", "deprecated": false, "name": "_handleMouseDownEvent"}, {"access": "private", "deprecated": false, "name": "_handleMouseUp"}, {"access": "private", "deprecated": false, "name": "_handleTarget"}, {"access": "private", "deprecated": false, "name": "_ieSelectFix"}, {"access": "private", "deprecated": false, "name": "_move"}, {"access": "private", "deprecated": false, "name": "_moveNode"}, {"access": "private", "deprecated": false, "name": "_prep"}, {"access": "private", "deprecated": false, "name": "_setStartPosition"}, {"access": "private", "deprecated": false, "name": "_timeoutCheck"}, {"access": "private", "deprecated": false, "name": "_unprep"}, {"access": "", "deprecated": false, "name": "addHandle"}, {"access": "", "deprecated": false, "name": "addInvalid"}, {"access": "", "deprecated": false, "name": "addToGroup"}, {"access": "private", "deprecated": false, "name": "destructor"}, {"access": "", "deprecated": false, "name": "end"}, {"access": "private", "deprecated": false, "name": "initializer"}, {"access": "", "deprecated": false, "name": "removeFromGroup"}, {"access": "", "deprecated": false, "name": "removeHandle"}, {"access": "", "deprecated": false, "name": "removeInvalid"}, {"access": "", "deprecated": false, "name": "start"}, {"access": "", "deprecated": false, "name": "stopDrag"}, {"access": "", "deprecated": false, "name": "validClick"}], "Base": [{"access": "protected", "deprecated": false, "name": "_defDestroyFn"}, {"access": "protected", "deprecated": false, "name": "_defInitFn"}, {"access": "private", "deprecated": false, "name": "_destroyHierarchy"}, {"access": "protected", "deprecated": false, "name": "_getClasses"}, {"access": "private", "deprecated": false, "name": "_initHierarchy"}, {"access": "private", "deprecated": false, "name": "_prefixEvtType"}, {"access": "", "deprecated": false, "name": "after"}, {"access": "", "deprecated": false, "name": "destroy"}, {"access": "", "deprecated": false, "name": "fire"}, {"access": "", "deprecated": false, "name": "init"}, {"access": "", "deprecated": false, "name": "publish"}, {"access": "", "deprecated": false, "name": "subscribe"}, {"access": "", "deprecated": false, "name": "toString"}, {"access": "", "deprecated": false, "name": "unsubscribe"}, {"access": "", "deprecated": false, "name": "unsubscribeAll"}], "Event.Target": [{"access": "", "deprecated": false, "name": "addTarget"}, {"access": "", "deprecated": false, "name": "after"}, {"access": "", "deprecated": false, "name": "bubble"}, {"access": "", "deprecated": false, "name": "fire"}, {"access": "", "deprecated": false, "name": "getEvent"}, {"access": "", "deprecated": false, "name": "publish"}, {"access": "", "deprecated": false, "name": "removeTarget"}, {"access": "", "deprecated": false, "name": "subscribe"}, {"access": "", "deprecated": false, "name": "unsubscribe"}, {"access": "", "deprecated": false, "name": "unsubscribeAll"}]}}, "description": "This is a simple Drag plugin that can be attached to a Node via the plug method.", "guessedname": "plugin.DragPlugin", "name": "plugin.DragPlugin"}, {"extends": {"superclass": {"Attribute": "Attribute", "Base": "Base", "Event.Target": "Event.Target", "Drop": "Drop"}, "events": {"Base": [{"access": "", "deprecated": false, "name": "destroy"}, {"access": "", "deprecated": false, "name": "destroyedChange"}, {"access": "", "deprecated": false, "name": "init"}, {"access": "", "deprecated": false, "name": "initializedChange"}], "Drop": [{"access": "", "deprecated": false, "name": "bubblesChange"}, {"access": "", "deprecated": false, "name": "drop:enter"}, {"access": "", "deprecated": false, "name": "drop:exit"}, {"access": "", "deprecated": false, "name": "drop:hit"}, {"access": "", "deprecated": false, "name": "drop:over"}, {"access": "", "deprecated": false, "name": "groupsChange"}, {"access": "", "deprecated": false, "name": "lockChange"}, {"access": "", "deprecated": false, "name": "nodeChange"}, {"access": "", "deprecated": false, "name": "paddingChange"}]}, "configs": {"Base": [{"access": "", "deprecated": false, "name": "destroyed"}, {"access": "", "deprecated": false, "name": "initialized"}], "Drop": [{"access": "", "deprecated": false, "name": "bubbles"}, {"access": "", "deprecated": false, "name": "groups"}, {"access": "", "deprecated": false, "name": "lock"}, {"access": "", "deprecated": false, "name": "node"}, {"access": "", "deprecated": false, "name": "padding"}]}, "properties": {"Base": [{"access": "", "deprecated": false, "name": "name"}], "Drop": [{"access": "private", "deprecated": false, "name": "_groups"}, {"access": "private", "deprecated": false, "name": "_valid"}, {"access": "", "deprecated": false, "name": "overTarget"}, {"access": "", "deprecated": false, "name": "region"}, {"access": "", "deprecated": false, "name": "shim"}], "Attribute": []}, "methods": {"Base": [{"access": "protected", "deprecated": false, "name": "_defDestroyFn"}, {"access": "protected", "deprecated": false, "name": "_defInitFn"}, {"access": "private", "deprecated": false, "name": "_destroyHierarchy"}, {"access": "protected", "deprecated": false, "name": "_getClasses"}, {"access": "private", "deprecated": false, "name": "_initHierarchy"}, {"access": "private", "deprecated": false, "name": "_prefixEvtType"}, {"access": "", "deprecated": false, "name": "after"}, {"access": "", "deprecated": false, "name": "destroy"}, {"access": "", "deprecated": false, "name": "fire"}, {"access": "", "deprecated": false, "name": "init"}, {"access": "", "deprecated": false, "name": "publish"}, {"access": "", "deprecated": false, "name": "subscribe"}, {"access": "", "deprecated": false, "name": "toString"}, {"access": "", "deprecated": false, "name": "unsubscribe"}, {"access": "", "deprecated": false, "name": "unsubscribeAll"}], "Drop": [{"access": "private", "deprecated": false, "name": "_activateShim"}, {"access": "private", "deprecated": false, "name": "_createEvents"}, {"access": "private", "deprecated": false, "name": "_createShim"}, {"access": "private", "deprecated": false, "name": "_deactivateShim"}, {"access": "private", "deprecated": false, "name": "_handleOut"}, {"access": "private", "deprecated": false, "name": "_handleOverEvent"}, {"access": "private", "deprecated": false, "name": "_handleOverTarget"}, {"access": "private", "deprecated": false, "name": "destructor"}, {"access": "", "deprecated": false, "name": "inGroup"}, {"access": "private", "deprecated": false, "name": "initializer"}, {"access": "", "deprecated": false, "name": "sizeShim"}], "Event.Target": [{"access": "", "deprecated": false, "name": "addTarget"}, {"access": "", "deprecated": false, "name": "after"}, {"access": "", "deprecated": false, "name": "bubble"}, {"access": "", "deprecated": false, "name": "fire"}, {"access": "", "deprecated": false, "name": "getEvent"}, {"access": "", "deprecated": false, "name": "publish"}, {"access": "", "deprecated": false, "name": "removeTarget"}, {"access": "", "deprecated": false, "name": "subscribe"}, {"access": "", "deprecated": false, "name": "unsubscribe"}, {"access": "", "deprecated": false, "name": "unsubscribeAll"}], "Attribute": [{"access": "private", "deprecated": false, "name": "_cloneAttVal"}, {"access": "private", "deprecated": false, "name": "_defAttSet"}, {"access": "private", "deprecated": false, "name": "_fireAttChange"}, {"access": "private", "deprecated": false, "name": "_getSubAttVal"}, {"access": "protected", "deprecated": false, "name": "_initAtts"}, {"access": "private", "deprecated": false, "name": "_initAttVal"}, {"access": "protected", "deprecated": false, "name": "_set"}, {"access": "private", "deprecated": false, "name": "_setSubAttVal"}, {"access": "private", "deprecated": false, "name": "_splitAttrValues"}, {"access": "", "deprecated": false, "name": "addAtt"}, {"access": "", "deprecated": false, "name": "get"}, {"access": "", "deprecated": false, "name": "getAtts"}, {"access": "", "deprecated": false, "name": "on"}, {"access": "", "deprecated": false, "name": "removeAtt"}, {"access": "", "deprecated": false, "name": "reset"}, {"access": "", "deprecated": false, "name": "set"}, {"access": "", "deprecated": false, "name": "setAtts"}]}}, "description": "This is a simple Drop plugin that can be attached to a Node via the plug method.", "guessedname": "plugin.DropPlugin", "name": "plugin.DropPlugin"}];
+                            </script>
+                            <div id="splash_classList">
+                                <ul>
+                                    <li><a href="plugin.DragPlugin.html" title="plugin.DragPlugin" id="class_0">plugin.DragPlugin</a></li>
+                                    <li><a href="plugin.DropPlugin.html" title="plugin.DropPlugin" id="class_1">plugin.DropPlugin</a></li>
+                                </ul>
+                            </div>
+                    </div>
+                    <div class="yui-u">
+                                    <div class="submodules">
+                                        <h4>Submodules:</h4> 
+                                        <dl>
+                                            <dt><code><a href="plugin.DropPlugin.html" title="dd-drop-plugin">dd-drop-plugin</a></code></dt>
+                                            <dd>This is a simple Drop plugin that can be attached to a Node via the plug method.</dd>
+                                            <dt><code><a href="plugin.DragPlugin.html" title="dd-plugin">dd-plugin</a></code></dt>
+                                            <dd>This is a simple Drag plugin that can be attached to a Node via the plug method.</dd>
+                                        </dl>
+                                    </div>
+
+                        </div>
+                </div>
+
+			</div>
+		</div>
+		<div class="yui-b">
+            <div class="nav">
+
+                    <div id="moduleList" class="module">
+                        <h4>Modules</h4>
+                        <ul class="content">
+                                <li class=""><a href="module_anim.html" title="anim">anim</a></li>
+                                <li class=""><a href="module_attribute.html" title="attribute">attribute</a></li>
+                                <li class=""><a href="module_base.html" title="base">base</a></li>
+                                <li class=""><a href="module_classnamemanager.html" title="classnamemanager">classnamemanager</a></li>
+                                <li class=""><a href="module_console.html" title="console">console</a></li>
+                                <li class=""><a href="module_cookie.html" title="cookie">cookie</a></li>
+                                <li class=""><a href="module_dd.html" title="dd">dd</a></li>
+                                <li class="selected"><a href="module_dd-plugin.html" title="dd-plugin">dd-plugin</a></li>
+                                <li class=""><a href="module_dom.html" title="dom">dom</a></li>
+                                <li class=""><a href="module_dump.html" title="dump">dump</a></li>
+                                <li class=""><a href="module_event.html" title="event">event</a></li>
+                                <li class=""><a href="module_io.html" title="io">io</a></li>
+                                <li class=""><a href="module_json.html" title="json">json</a></li>
+                                <li class=""><a href="module_node.html" title="node">node</a></li>
+                                <li class=""><a href="module_node-menunav.html" title="node-menunav">node-menunav</a></li>
+                                <li class=""><a href="module_oop.html" title="oop">oop</a></li>
+                                <li class=""><a href="module_overlay.html" title="overlay">overlay</a></li>
+                                <li class=""><a href="module_plugin.html" title="plugin">plugin</a></li>
+                                <li class=""><a href="module_profiler.html" title="profiler">profiler</a></li>
+                                <li class=""><a href="module_queue.html" title="queue">queue</a></li>
+                                <li class=""><a href="module_slider.html" title="slider">slider</a></li>
+                                <li class=""><a href="module_substitute.html" title="substitute">substitute</a></li>
+                                <li class=""><a href="module_widget.html" title="widget">widget</a></li>
+                                <li class=""><a href="module_widget-position.html" title="widget-position">widget-position</a></li>
+                                <li class=""><a href="module_widget-position-ext.html" title="widget-position-ext">widget-position-ext</a></li>
+                                <li class=""><a href="module_widget-stack.html" title="widget-stack">widget-stack</a></li>
+                                <li class=""><a href="module_widget-stdmod.html" title="widget-stdmod">widget-stdmod</a></li>
+                                <li class=""><a href="module_yui.html" title="yui">yui</a></li>
+                                <li class=""><a href="module_yuitest.html" title="yuitest">yuitest</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="classList" class="module">
+                        <h4>Classes</h4>
+                        <ul class="content">
+                                <li class=""><a href="plugin.DragPlugin.html" title="plugin.DragPlugin">plugin.DragPlugin</a></li>
+                                <li class=""><a href="plugin.DropPlugin.html" title="plugin.DropPlugin">plugin.DropPlugin</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="fileList" class="module">
+                        <h4>Files</h4>
+                        <ul class="content">        
+                                <li class=""><a href="dd-drop-plugin.js.html" title="dd-drop-plugin.js">dd-drop-plugin.js</a></li>
+                                <li class=""><a href="dd-plugin.js.html" title="dd-plugin.js">dd-plugin.js</a></li>
+                        </ul>
+                    </div>
+
+
+
+
+
+            </div>
+		</div>
+	</div>
+	<div id="ft">
+        <hr />
+        Copyright &copy; 2008 Yahoo! Inc. All rights reserved.
+	</div>
+</div>
+<script type="text/javascript">
+    ALL_YUI_PROPS = [{"access": "", "host": "plugin.DropPlugin", "name": "NAME", "url": "plugin.DropPlugin.html#property_NAME", "type": "property"}, {"access": "", "host": "plugin.DragPlugin", "name": "NAME", "url": "plugin.DragPlugin.html#property_NAME", "type": "property"}, {"access": "", "host": "plugin.DropPlugin", "name": "NS", "url": "plugin.DropPlugin.html#property_NS", "type": "property"}, {"access": "", "host": "plugin.DragPlugin", "name": "NS", "url": "plugin.DragPlugin.html#property_NS", "type": "property"}];
+</script>
+</body>
+</html>

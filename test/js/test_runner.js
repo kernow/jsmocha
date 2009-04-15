@@ -3,7 +3,7 @@
 **/
 var jsMochaTests = {};
 // Create new YUI instance, and populate it with the required modules
-YUI().use("console", "yuitest", function(Y) {
+YUI({base: 'js/yui/build/'}).use("console", "yuitest", function(Y) {
 	var yconsole = new Y.Console({
 		newestOnTop: false                   
 	});
