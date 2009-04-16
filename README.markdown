@@ -3,6 +3,11 @@ jsMocha
 
 jsMocha is a JavaScript mocking library that's inspired by [Ruby Mocha Gem](http://mocha.rubyforge.org). It's designed to be test framework agnostic and should work with most testing frameworks. jsMocha was written by [Jamie Dyer](http://kernowsoul.com) while working at [Jiva Technology](http://jivatechnology.com).
 
+Download
+--------
+
+Packaged download versions are available on the [github download page](http://github.com/kernow/jsmocha/downloads).
+
 TODO:
 -----
 
