@@ -60,7 +60,7 @@ jsMochaTests.ExpectationTests = function(Y) {
 			report_string	 += "\r\nPASS invoked 1 times";
 			report_string	 += "\r\nFAIL expected (string) but got (string 2)";
 			Y.Assert.areEqual(report_string, this.expectation.report());
-		},
+		}
 	}));
 	return testSuite;
 };

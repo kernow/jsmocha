@@ -28,19 +28,6 @@ jsMochaTests.MockTests = function(Y) {
 			Y.Assert.isFunction(this.mock.jsmocha.teardown);
 		},
 		
-		testShouldReturnExpectedValues : function () {
-			this.mock.expects('return_string').returns('string');
-			Y.Assert.areEqual('string', this.mock.return_string());
-			
-			var array = new Array(1,2,3,4);
-			this.mock.expects('return_array').returns(array);
-			Y.Assert.areEqual(array, this.mock.return_array());
-			
-			var obj = {data: 'string'};
-			this.mock.expects('return_object').returns(obj);
-			Y.Assert.areEqual(obj, this.mock.return_object());
-		},
-		
 		testShouldInvokeOnce : function () {
 			this.mock.expects('a_method');
 			Y.Assert.isFalse(this.mock.jsmocha.verify());
@@ -120,7 +107,7 @@ jsMochaTests.MockTests = function(Y) {
 		
 	}));
 	
-	
+
 	
 	
 	testSuite.add(new Y.Test.Case({
@@ -153,6 +140,51 @@ jsMochaTests.MockTests = function(Y) {
 			Y.Assert.isUndefined(this.mock.jsmocha);
 		},
 		
+	}));
+	
+	
+	
+	
+	testSuite.add(new Y.Test.Case({
+		
+		name: "returns",
+		
+		setUp : function () {
+			this.mock = {
+				a_method: function(){
+					return 'original';
+				}
+			};
+			new Mock(this.mock);
+		},
+		
+		tearDown : function () { 
+			delete this.mock;
+		},
+		
+		testShouldReturnExpectedValues : function () {
+			this.mock.expects('return_string').returns('string');
+			Y.Assert.areEqual('string', this.mock.return_string());
+			
+			var array = new Array(1,2,3,4);
+			this.mock.expects('return_array').returns(array);
+			Y.Assert.areEqual(array, this.mock.return_array());
+			
+			var obj = {data: 'string'};
+			this.mock.expects('return_object').returns(obj);
+			Y.Assert.areEqual(obj, this.mock.return_object());
+		},
+		
+  	testShouldReturnMultipleValues : function () {
+  	  this.mock.expects('a_method').returns('mocked1', 'mocked2', 'mocked3', 'mocked4');
+  		Y.Assert.areEqual('mocked1', this.mock.a_method());
+  		Y.Assert.areEqual('mocked2', this.mock.a_method());
+  		Y.Assert.areEqual('mocked3', this.mock.a_method());
+  		Y.Assert.areEqual('mocked4', this.mock.a_method());
+      Y.Assert.areEqual('mocked4', this.mock.a_method());
+      Y.Assert.areEqual('mocked4', this.mock.a_method());
+      Y.Assert.areEqual('mocked4', this.mock.a_method());
+    }
 	}));
 	
 
