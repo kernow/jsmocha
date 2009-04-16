@@ -14,6 +14,7 @@ TODO:
 - Add stubbing
 - Add better parameter matcher reporting of complex objects
 - Add support for multiple expects with different `passing()` parameters
+- Add parameter matching helpers
 
 Examples
 --------
@@ -53,6 +54,14 @@ Mock returns the original object passed to it so in the above example `mock` and
 The `say()` method should be called with the parameter string 'hello'
 
 	greeting.expects('say').passing('hello');
+	
+The `say()` method should be called with the parameters 'hello' and 'world'
+
+	greeting.expects('say').passing('hello', 'world');
+	
+If you need to match complex parameters you can pass a code block to the `passing()` method, a parameters array is passed to the block. The matcher block can then be as complex as is needed to verify the correct parameters were received, the matcher block must return true or false depending on a successful or unsuccessful match.
+
+	greeting.expects('say').passing(function(p){ return p[0] == 'hello' ? true : false });
 	
 ### Specifying what the mock should return
 

@@ -125,6 +125,14 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 			Y.Assert.isFalse(pm.match(bad_args3));
 		},
 		
+		testShouldAcceptParameterMatchingBlock : function () {
+		  var args = this.get_args('a string');
+			var bad_args = this.get_args('a string 2');
+			var pm = new ParametersMatcher(function(params){ return params[0] == 'a string' ? true : false });
+			Y.Assert.isTrue(pm.match(args));
+			Y.Assert.isFalse(pm.match(bad_args));
+	  }
+		
 	}));
 	
 	// report tests
