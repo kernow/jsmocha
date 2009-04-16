@@ -55,6 +55,14 @@ The method `say()` should return the string 'greeting sent'
 
 	greeting.expects('say').returns('greeting sent');
 	
+A mock can return a different value each time it's called by passing multiple values to `returns()`
+
+	greeting.expects('say').returns('greeting sent once', 'greeting sent twice', 'greeting sent three times');
+	greeting.say('hello'); # returns 'greeting sent once'
+	greeting.say('hello'); # returns 'greeting sent twice'
+	greeting.say('hello'); # returns 'greeting sent three times'
+	greeting.say('hello'); # returns 'greeting sent three times', the last value will be returned for any subsequent calls
+	
 ### Stringing expectations together
 
 jsMocha is designed so that expectations can be strung together neatly
