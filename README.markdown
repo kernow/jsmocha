@@ -61,7 +61,7 @@ The `say()` method should be called with the parameters 'hello' and 'world'
 	
 If you need to match complex parameters you can pass a code block to the `passing()` method, a parameters array is passed to the block. The matcher block can then be as complex as is needed to verify the correct parameters were received, the matcher block must return true or false depending on a successful or unsuccessful match.
 
-	greeting.expects('say').passing(function(p){ return p[0] == 'hello' ? true : false });
+	greeting.expects('say').passing(function(params){ return params[0] == 'hello' ? true : false; });
 	
 ### Specifying what the mock should return
 
