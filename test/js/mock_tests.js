@@ -105,6 +105,24 @@ jsMochaTests.MockTests = function(Y) {
 			Y.Assert.isFalse(this.mock.jsmocha.verify());
 		},
 		
+		testShouldPassValidationWhenUsingMatchingBlock : function () {
+		  this.mock.expects('a_method').passing(function(p){ return p[0] == 'a string' ? true : false });
+		  this.mock.a_method('a string');
+			Y.Assert.isTrue(this.mock.jsmocha.verify());
+		},
+		
+    testShouldFailValidationWhenUsingMatchingBlock : function () {
+      this.mock.expects('a_method').passing(function(p){ return p[0] == 'a string' ? true : false });
+      this.mock.a_method([1,2,3]);
+     Y.Assert.isFalse(this.mock.jsmocha.verify());
+    },
+    
+    testShouldPassValidationWhenUsingMatchingBlockOnMultipleParams : function () {
+      this.mock.expects('a_method').passing(function(p){ return p[0] == 'a string' ? true : false });
+      this.mock.a_method('a string', 1, 'another string');
+     Y.Assert.isTrue(this.mock.jsmocha.verify());
+    },
+		
 	}));
 	
 
