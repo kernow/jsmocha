@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<application xmlns="http://ns.adobe.com/air/application/1.5">
+	<id>js.mocha</id>
+	<name>jsMocha Tests</name>
+	<version>0.03</version>
+	<filename>jsMocha Tests</filename>
+	<description>jsMocha Tests</description>
+	<initialWindow>    	
+		<title>jsMocha Tests</title>
+		<content>test/acceptance.html</content>
+		<systemChrome>standard</systemChrome>
+		<transparent>false</transparent>
+    <visible>true</visible>
+		<width>380</width>
+		<height>370</height>
+		<maximizable>false</maximizable>
+		<minimizable>false</minimizable>
+		<resizable>true</resizable>
+	</initialWindow>
+</application>
