@@ -39,7 +39,7 @@ Mock returns the original object passed to it so in the above example `mock` and
 
 	greeting.expects('say');
 	
-### Specifying the number of times an expectation should be called
+### Specifying the number of times a method should be called
 
 	greeting.expects('say'); # expected once
 	greeting.expects('say').once(); # expected once
@@ -47,6 +47,8 @@ Mock returns the original object passed to it so in the above example `mock` and
 	greeting.expects('say').never(); # never expected
 	greeting.expects('say').times(3); # expected 3 times
 	greeting.expects('say').times(0); # never expected
+	greeting.expects('say').at_least(3); # expected 3 or more times
+	greeting.expects('say').at_most(3); # expected 3 times or less
 	
 ### Specifying the expected parameters
 
