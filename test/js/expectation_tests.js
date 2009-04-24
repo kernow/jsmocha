@@ -48,16 +48,16 @@ jsMochaTests.ExpectationTests = function(Y) {
 		testInvocationVerificationReport : function () {
 			this.expectation.verify();
 			var report_string = "object: AnObject.a_method";
-			report_string	 += "\r\nFAIL wrong number of invocations, expected 1 invoked 0 times";
+			report_string	 += "\r\nFAIL wrong number of invocations, expected exactly once invoked no times";
 			Y.Assert.areEqual(report_string, this.expectation.report());
 		},
 		
-		testShouldFailParamsVerification : function () {
+		testShouldFailParamsVerificationAndProvideReport : function () {
 			this.expectation.passing('string');
 			this.obj.a_method('string 2');
 			this.expectation.verify();
 			var report_string = "object: AnObject.a_method";
-			report_string	 += "\r\nPASS invoked 1 times";
+			report_string	 += "\r\nPASS expected exactly once invoked once";
 			report_string	 += "\r\nFAIL expected (string) but got (string 2)";
 			Y.Assert.areEqual(report_string, this.expectation.report());
 		}

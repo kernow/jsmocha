@@ -48,14 +48,14 @@ jsMochaTests.ExpectationListTests = function(Y) {
 			Y.Assert.isFalse(mock_obj.jsmocha.expectations.all_passed([false]));
 		},
 		
-		testCanGetInvokationReport : function () {
+		testCanGetInvocationReport : function () {
 			this.mock.expects('a_method');
 			mock.jsmocha.verify();
-			var expected_fail_str = "\r\nobject: Object.a_method\r\nFAIL wrong number of invocations, expected 1 invoked 0 times";
+			var expected_fail_str = "\r\nobject: Object.a_method\r\nFAIL wrong number of invocations, expected exactly once invoked no times";
 			Y.Assert.areEqual(expected_fail_str, this.mock.jsmocha.expectations.reports());
 			this.mock.a_method();
 			mock.jsmocha.verify();
-			var expected_pass_str = "\r\nobject: Object.a_method\r\nPASS invoked 1 times";
+			var expected_pass_str = "\r\nobject: Object.a_method\r\nPASS expected exactly once invoked once";
 			Y.Assert.areEqual(expected_pass_str, this.mock.jsmocha.expectations.reports());
 		},
 		
@@ -63,13 +63,13 @@ jsMochaTests.ExpectationListTests = function(Y) {
 			this.mock.expects('a_method').passing('a string');
 			mock.jsmocha.verify();
 			var expected_fail_str = "\r\nobject: Object.a_method";
-			expected_fail_str	 += "\r\nFAIL wrong number of invocations, expected 1 invoked 0 times";
+			expected_fail_str	 += "\r\nFAIL wrong number of invocations, expected exactly once invoked no times";
 			expected_fail_str	 += "\r\nFAIL expected (a string) but got (undefined)";
 			Y.Assert.areEqual(expected_fail_str, this.mock.jsmocha.expectations.reports());
 			this.mock.a_method();
 			mock.jsmocha.verify();
 			var expected_pass_str = "\r\nobject: Object.a_method";
-			expected_pass_str	 += "\r\nPASS invoked 1 times";
+			expected_pass_str	 += "\r\nPASS expected exactly once invoked once";
 			expected_pass_str	 += "\r\nFAIL expected (a string) but got ()";
 			Y.Assert.areEqual(expected_pass_str, this.mock.jsmocha.expectations.reports());
 		},
@@ -79,7 +79,7 @@ jsMochaTests.ExpectationListTests = function(Y) {
 			this.mock.a_method('a string');
 			mock.jsmocha.verify();
 			var expected_pass_str = "\r\nobject: Object.a_method";
-			expected_pass_str	 += "\r\nPASS invoked 1 times";
+			expected_pass_str	 += "\r\nPASS expected exactly once invoked once";
 			Y.Assert.areEqual(expected_pass_str, this.mock.jsmocha.expectations.reports());
 		}
 		
