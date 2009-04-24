@@ -153,38 +153,38 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 			var bad_args1 = this.get_args('a string 2');
 			var pm = new ParametersMatcher(args1);
 			Y.Assert.isFalse(pm.match(bad_args1));
-			Y.Assert.areEqual('expected (a string) but got (a string 2)', pm.report());
+			Y.Assert.areEqual('expected ("a string") but got ("a string 2")', pm.report());
 			
 			var args2 = this.get_args('string 1', 'string 2', 'string 3', 'string 4');
 			var bad_args2 = this.get_args('string 1', 'string 4', 'string 3', 'string 2');
 			var pm2 = new ParametersMatcher(args2);
 			Y.Assert.isFalse(pm2.match(bad_args2));
-			Y.Assert.areEqual('expected (string 1, string 2, string 3, string 4) but got (string 1, string 4, string 3, string 2)', pm2.report());
+			Y.Assert.areEqual('expected ("string 1", "string 2", "string 3", "string 4") but got ("string 1", "string 4", "string 3", "string 2")', pm2.report());
 		},
 		
-		// testShouldGenerateMeaningfulReportFromObjectParameters : function () {
-		// 	var obj = {
-		// 		nested_obj: {
-		// 			data: 'string',
-		// 			other_data: [1,2,3]
-		// 		},
-		// 		an_array: [1,2,3,4,5,6],
-		// 		a_string: 'string'
-		// 	};
-		// 	var bad_obj = {
-		// 		nested_obj: {
-		// 			data: 'string2',
-		// 			other_data: [1,2,3]
-		// 		},
-		// 		an_array: [1,2,3,4,5,6],
-		// 		a_string: 'string'
-		// 	};
-		// 	var args = this.get_args(obj);
-		// 	var bad_args = this.get_args(bad_obj);
-		// 	var pm = new ParametersMatcher(args);
-		// 	Y.Assert.isFalse(pm.match(bad_args));
-		// 	Y.Assert.areEqual('rrrrrrr', pm.report());
-		// },
+    testShouldGenerateMeaningfulReportFromObjectParameters : function () {
+      var obj = {
+        nested_obj: {
+          data: 'string',
+          other_data: [1,2,3]
+        },
+        an_array: [1,2,3,4,5,6],
+        a_string: 'string'
+      };
+      var bad_obj = {
+        nested_obj: {
+          data: 'string2',
+          other_data: [1,2,3]
+        },
+        an_array: [1,2,3,4,5,6],
+        a_string: 'string'
+      };
+      var args = this.get_args(obj);
+      var bad_args = this.get_args(bad_obj);
+      var pm = new ParametersMatcher(args);
+      Y.Assert.isFalse(pm.match(bad_args));
+      Y.Assert.areEqual('expected ({nested_obj:{data:"string", other_data:[1, 2, 3]}, an_array:[1, 2, 3, 4, 5, 6], a_string:"string"}) but got ({nested_obj:{data:"string2", other_data:[1, 2, 3]}, an_array:[1, 2, 3, 4, 5, 6], a_string:"string"})', pm.report());
+    },
 		
 	}));
 	

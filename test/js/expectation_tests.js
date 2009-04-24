@@ -58,7 +58,7 @@ jsMochaTests.ExpectationTests = function(Y) {
 			this.expectation.verify();
 			var report_string = "object: AnObject.a_method";
 			report_string	 += "\r\nPASS expected exactly once invoked once";
-			report_string	 += "\r\nFAIL expected (string) but got (string 2)";
+			report_string	 += "\r\nFAIL expected (\"string\") but got (\"string 2\")";
 			Y.Assert.areEqual(report_string, this.expectation.report());
 		}
 	}));

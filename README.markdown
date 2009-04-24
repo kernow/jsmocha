@@ -11,7 +11,6 @@ Packaged download versions are available on the [github download page](http://gi
 TODO:
 -----
 
-- Add better parameter matcher reporting of complex objects
 - Add support for multiple expects with different `passing()` parameters
 - Add parameter matching helpers
 

@@ -64,13 +64,13 @@ jsMochaTests.ExpectationListTests = function(Y) {
 			mock.jsmocha.verify();
 			var expected_fail_str = "\r\nobject: Object.a_method";
 			expected_fail_str	 += "\r\nFAIL wrong number of invocations, expected exactly once invoked no times";
-			expected_fail_str	 += "\r\nFAIL expected (a string) but got (undefined)";
+			expected_fail_str	 += "\r\nFAIL expected (\"a string\") but got (undefined)";
 			Y.Assert.areEqual(expected_fail_str, this.mock.jsmocha.expectations.reports());
 			this.mock.a_method();
 			mock.jsmocha.verify();
 			var expected_pass_str = "\r\nobject: Object.a_method";
 			expected_pass_str	 += "\r\nPASS expected exactly once invoked once";
-			expected_pass_str	 += "\r\nFAIL expected (a string) but got ()";
+			expected_pass_str	 += "\r\nFAIL expected (\"a string\") but got ()";
 			Y.Assert.areEqual(expected_pass_str, this.mock.jsmocha.expectations.reports());
 		},
 		
