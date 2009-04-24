@@ -64,7 +64,33 @@ jsMochaTests.MockTests = function(Y) {
 			Y.Assert.isFalse(this.mock.jsmocha.verify());
 			this.mock.a_method();
 			Y.Assert.isTrue(this.mock.jsmocha.verify());
-		}
+		},
+		
+		testShouldInvokeAtLeast : function () {
+			this.mock.expects('a_method').at_least(3);
+			Y.Assert.isFalse(this.mock.jsmocha.verify());
+			this.mock.a_method();
+			Y.Assert.isFalse(this.mock.jsmocha.verify());
+			this.mock.a_method();
+			Y.Assert.isFalse(this.mock.jsmocha.verify());
+			this.mock.a_method();
+			Y.Assert.isTrue(this.mock.jsmocha.verify());
+			this.mock.a_method();
+			Y.Assert.isTrue(this.mock.jsmocha.verify());
+		},
+		
+		testShouldInvokeAtMost : function () {
+			this.mock.expects('a_method').at_most(3);
+			Y.Assert.isTrue(this.mock.jsmocha.verify());
+			this.mock.a_method();
+			Y.Assert.isTrue(this.mock.jsmocha.verify());
+			this.mock.a_method();
+			Y.Assert.isTrue(this.mock.jsmocha.verify());
+			this.mock.a_method();
+			Y.Assert.isTrue(this.mock.jsmocha.verify());
+			this.mock.a_method();
+			Y.Assert.isFalse(this.mock.jsmocha.verify());
+		},
 	}));
 	
 	

@@ -11,7 +11,6 @@ Packaged download versions are available on the [github download page](http://gi
 TODO:
 -----
 
-- Add stubbing
 - Add better parameter matcher reporting of complex objects
 - Add support for multiple expects with different `passing()` parameters
 - Add parameter matching helpers
@@ -19,7 +18,7 @@ TODO:
 Examples
 --------
 
-jsMocha's syntax is designed to closely match that of Mocha's which is extremely readable and simple. The major difference between Mocha syntax and jsMocha is `with()` parameter expectations have been changed to `passing()`, this is due to a naming conflict in JavaScript.
+jsMocha's syntax is designed to closely match that of Mocha's which is extremely readable. The major difference between Mocha syntax and jsMocha is `with()` parameter expectations have been changed to `passing()`, this is due to a naming conflict in JavaScript.
 
 A mocked object has the `expects()` method available and also the jsmocha object. The `verify()`, `report()` and `teardown()` methods are available through the jsmocha object to avoid naming conflicts.
 
@@ -100,6 +99,21 @@ Returns a report of all failed expectations.
 ### Resetting mocked objects, teardown
 
 Object tear down MUST be called explicitly by calling `report()` or `teardown()`, in the above example this would be done by calling `greeting.jsmocha.report()` or `greeting.jsmocha.teardown()`
+
+### Stubbing
+
+jsMocha also supports stubbing, a stub has no expectations on the number of times a method should be called. To stub a method
+
+	greeting.stubs('say');
+	
+`greeting.say()` can now be called any number of times, calls are captured by jsMocha rather than the original object.
+
+Subs can also return data just like mocks
+
+	greeting.stubs('say').returns('a string');
+	greeting.stubs('say').returns(1,2,3,4);
+	
+You must still call the `report()` or `teardown()` methods to return stubbed objects back to their original state.
 
 License
 -------
