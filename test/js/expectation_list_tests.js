@@ -7,10 +7,10 @@ jsMochaTests.ExpectationListTests = function(Y) {
 		name: "Expectation List",
 		
 		setUp : function () {
-			this.expectation_list = new ExpectationList();
+			this.expectation_list = new jsMocha.ExpectationList();
 			this.mock = new Mock();
-			this.expectation1 = new Expectation(mock.jsmocha, 'a_method');
-			this.expectation2 = new Expectation(mock.jsmocha, 'another_method');
+			this.expectation1 = new jsMocha.Expectation(mock.jsmocha, 'a_method');
+			this.expectation2 = new jsMocha.Expectation(mock.jsmocha, 'another_method');
 		},
 		
 		tearDown : function () { 

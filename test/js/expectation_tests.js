@@ -13,7 +13,7 @@ jsMochaTests.ExpectationTests = function(Y) {
 				};
 			}
 			this.obj = new AnObject();
-			this.expectation = new Expectation(this.obj, 'a_method');
+			this.expectation = new jsMocha.Expectation(this.obj, 'a_method');
 		},
 		
 		tearDown : function () { 

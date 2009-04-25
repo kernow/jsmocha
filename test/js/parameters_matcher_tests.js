@@ -17,7 +17,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 		testCanMatchAString : function () {
 			var args = this.get_args('a string');
 			var bad_args = this.get_args('a string 2');
-			var pm = new ParametersMatcher(args);
+			var pm = new jsMocha.ParametersMatcher(args);
 			Y.Assert.isTrue(pm.match(args));
 			Y.Assert.isFalse(pm.match(bad_args));
 		},
@@ -25,7 +25,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 		testCanMatchMultipleStrings : function () {
 			var args = this.get_args('string 1', 'string 2', 'string 3', 'string 4');
 			var bad_args = this.get_args('string 1', 'string 4', 'string 3', 'string 2');
-			var pm = new ParametersMatcher(args);
+			var pm = new jsMocha.ParametersMatcher(args);
 			Y.Assert.isTrue(pm.match(args));
 			Y.Assert.isFalse(pm.match(bad_args));
 		},
@@ -33,7 +33,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 		testCanMatchAnArray : function () {
 			var args = this.get_args([1,2,3,4]);
 			var bad_args = this.get_args([3,2,1,4]);
-			var pm = new ParametersMatcher(args);
+			var pm = new jsMocha.ParametersMatcher(args);
 			Y.Assert.isTrue(pm.match(args));
 			Y.Assert.isFalse(pm.match(bad_args));
 		},
@@ -42,7 +42,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 			var args = this.get_args([1,2,3,4,5,6]);
 			var bad_args1 = this.get_args([3,2,1,4]);
 			var bad_args2 = this.get_args([3,2,1,4,5,6,7,8]);
-			var pm = new ParametersMatcher(args);
+			var pm = new jsMocha.ParametersMatcher(args);
 			Y.Assert.isFalse(pm.match(bad_args1));
 			Y.Assert.isFalse(pm.match(bad_args2));
 		},
@@ -52,7 +52,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 			var bad_args1 = this.get_args([1,2,3,4],[5,4,7,8],[9,10,11,12]);
 			var bad_args2 = this.get_args([1,9,3,4],[5,4,7,8],[9,10,11,12]);
 			var bad_args3 = this.get_args([1,2,3,4],[5,4,7,8],[9,10,6,12]);
-			var pm = new ParametersMatcher(args);
+			var pm = new jsMocha.ParametersMatcher(args);
 			Y.Assert.isTrue(pm.match(args));
 			Y.Assert.isFalse(pm.match(bad_args1));
 			Y.Assert.isFalse(pm.match(bad_args2));
@@ -63,7 +63,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 			var args = this.get_args({data: 'string'});
 			var bad_args1 = this.get_args({data: 'string 2'});
 			var bad_args2 = this.get_args({data: 'string', other_data: [1,2,3]});
-			var pm = new ParametersMatcher(args);
+			var pm = new jsMocha.ParametersMatcher(args);
 			Y.Assert.isTrue(pm.match(args));
 			Y.Assert.isFalse(pm.match(bad_args1));
 			Y.Assert.isFalse(pm.match(bad_args2));
@@ -74,7 +74,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 			var bad_args1 = this.get_args({data: 'string 2'},{data: 'another string'});
 			var bad_args2 = this.get_args({data: 'string'},{data: 'another string 2'});
 			var bad_args3 = this.get_args({data: 'string'},{data_string: 'another string'});
-			var pm = new ParametersMatcher(args);
+			var pm = new jsMocha.ParametersMatcher(args);
 			Y.Assert.isTrue(pm.match(args));
 			Y.Assert.isFalse(pm.match(bad_args1));
 			Y.Assert.isFalse(pm.match(bad_args2));
@@ -118,7 +118,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 			var bad_args1 = this.get_args(bad_obj1);
 			var bad_args2 = this.get_args(bad_obj2);
 			var bad_args3 = this.get_args(bad_obj3);
-			var pm = new ParametersMatcher(args);
+			var pm = new jsMocha.ParametersMatcher(args);
 			Y.Assert.isTrue(pm.match(args));
 			Y.Assert.isFalse(pm.match(bad_args1));
 			Y.Assert.isFalse(pm.match(bad_args2));
@@ -128,7 +128,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
     testShouldAcceptParameterMatchingBlock : function () {
       var args = this.get_args('a string');
      var bad_args = this.get_args('a string 2');
-     var pm = new ParametersMatcher(this.get_args(function(params){ return params[0] == 'a string' ? true : false; }));
+     var pm = new jsMocha.ParametersMatcher(this.get_args(function(params){ return params[0] == 'a string' ? true : false; }));
      Y.Assert.isTrue(pm.match(args));
      Y.Assert.isFalse(pm.match(bad_args));
        }
@@ -151,13 +151,13 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 		testShouldGenerateAReportWhenInvalid : function () {
 			var args1 = this.get_args('a string');
 			var bad_args1 = this.get_args('a string 2');
-			var pm = new ParametersMatcher(args1);
+			var pm = new jsMocha.ParametersMatcher(args1);
 			Y.Assert.isFalse(pm.match(bad_args1));
 			Y.Assert.areEqual('expected ("a string") but got ("a string 2")', pm.report());
 			
 			var args2 = this.get_args('string 1', 'string 2', 'string 3', 'string 4');
 			var bad_args2 = this.get_args('string 1', 'string 4', 'string 3', 'string 2');
-			var pm2 = new ParametersMatcher(args2);
+			var pm2 = new jsMocha.ParametersMatcher(args2);
 			Y.Assert.isFalse(pm2.match(bad_args2));
 			Y.Assert.areEqual('expected ("string 1", "string 2", "string 3", "string 4") but got ("string 1", "string 4", "string 3", "string 2")', pm2.report());
 		},
@@ -181,7 +181,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
       };
       var args = this.get_args(obj);
       var bad_args = this.get_args(bad_obj);
-      var pm = new ParametersMatcher(args);
+      var pm = new jsMocha.ParametersMatcher(args);
       Y.Assert.isFalse(pm.match(bad_args));
       Y.Assert.areEqual('expected ({nested_obj:{data:"string", other_data:[1, 2, 3]}, an_array:[1, 2, 3, 4, 5, 6], a_string:"string"}) but got ({nested_obj:{data:"string2", other_data:[1, 2, 3]}, an_array:[1, 2, 3, 4, 5, 6], a_string:"string"})', pm.report());
     }
