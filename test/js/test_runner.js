@@ -9,7 +9,7 @@ YUI({base: 'js/yui/build/'}).use("console", "yuitest", function(Y) {
 	});
 	yconsole.render('#testLogger');
 	Y.Test.Runner.add(jsMochaTests.CardinalityTests(Y));
-	Y.Test.Runner.add(jsMochaTests.ExpectationListTests(Y));
+	Y.Test.Runner.add(jsMochaTests.ExpectationCollectionTests(Y));
 	Y.Test.Runner.add(jsMochaTests.ExpectationTests(Y));
 	Y.Test.Runner.add(jsMochaTests.MockTests(Y));
 	Y.Test.Runner.add(jsMochaTests.ParametersMatcherTests(Y));
