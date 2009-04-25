@@ -11,7 +11,7 @@ jsMochaTests.ExpectationTests = function(Y) {
 				this.a_method = function(){
 					return('original method');
 				};
-			};
+			}
 			this.obj = new AnObject();
 			this.expectation = new Expectation(this.obj, 'a_method');
 		},

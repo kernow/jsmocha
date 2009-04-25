@@ -95,7 +95,7 @@ jsMochaTests.CardinalityTests = function(Y) {
 		testInspectWithAnyNumberofTimes : function () {
 			var instance = Cardinality.at_least(0);
       Y.Assert.areEqual('allowed any number of times', instance.inspect());
-		},
+		}
 		
 	}));
 	

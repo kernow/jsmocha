@@ -90,7 +90,7 @@ jsMochaTests.MockTests = function(Y) {
 			Y.Assert.isTrue(this.mock.jsmocha.verify());
 			this.mock.a_method();
 			Y.Assert.isFalse(this.mock.jsmocha.verify());
-		},
+		}
 	}));
 	
 	
@@ -132,22 +132,22 @@ jsMochaTests.MockTests = function(Y) {
 		},
 		
 		testShouldPassValidationWhenUsingMatchingBlock : function () {
-		  this.mock.expects('a_method').passing(function(p){ return p[0] == 'a string' ? true : false });
+		  this.mock.expects('a_method').passing(function(p){ return p[0] == 'a string' ? true : false; });
 		  this.mock.a_method('a string');
 			Y.Assert.isTrue(this.mock.jsmocha.verify());
 		},
 		
     testShouldFailValidationWhenUsingMatchingBlock : function () {
-      this.mock.expects('a_method').passing(function(p){ return p[0] == 'a string' ? true : false });
+      this.mock.expects('a_method').passing(function(p){ return p[0] == 'a string' ? true : false; });
       this.mock.a_method([1,2,3]);
      Y.Assert.isFalse(this.mock.jsmocha.verify());
     },
     
     testShouldPassValidationWhenUsingMatchingBlockOnMultipleParams : function () {
-      this.mock.expects('a_method').passing(function(p){ return p[0] == 'a string' ? true : false });
+      this.mock.expects('a_method').passing(function(p){ return p[0] == 'a string' ? true : false; });
       this.mock.a_method('a string', 1, 'another string');
      Y.Assert.isTrue(this.mock.jsmocha.verify());
-    },
+    }
 		
 	}));
 	
@@ -164,7 +164,7 @@ jsMochaTests.MockTests = function(Y) {
 					return 'original';
 				}
 			};
-			new Mock(this.mock);
+			var mock = new Mock(this.mock);
 		},
 		
 		tearDown : function () { 
@@ -182,7 +182,7 @@ jsMochaTests.MockTests = function(Y) {
 			this.mock.jsmocha.teardown(this.mock.jsmocha);
 			Y.Assert.isUndefined(this.mock.expects);
 			Y.Assert.isUndefined(this.mock.jsmocha);
-		},
+		}
 		
 	}));
 	
@@ -199,7 +199,7 @@ jsMochaTests.MockTests = function(Y) {
 					return 'original';
 				}
 			};
-			new Mock(this.mock);
+			var mock = new Mock(this.mock);
 		},
 		
 		tearDown : function () { 
@@ -210,7 +210,7 @@ jsMochaTests.MockTests = function(Y) {
 			this.mock.expects('return_string').returns('string');
 			Y.Assert.areEqual('string', this.mock.return_string());
 			
-			var array = new Array(1,2,3,4);
+			var array = [1,2,3,4];
 			this.mock.expects('return_array').returns(array);
 			Y.Assert.areEqual(array, this.mock.return_array());
 			
@@ -277,7 +277,7 @@ jsMochaTests.MockTests = function(Y) {
 				this.a_method = function(){
 					alert('a_method called');
 				};
-			};
+			}
 			this.obj = new AnObject();
 		},
 		
@@ -320,8 +320,8 @@ jsMochaTests.MockTests = function(Y) {
 		_should: {
             error: {
                 testShouldCheckTypeOfMock: true,
-				testShouldNotAllowFunctions: true,
-				testShouldCheckForExpectsNameClash: true
+				        testShouldNotAllowFunctions: true,
+				        testShouldCheckForExpectsNameClash: true
             }
         },
 
@@ -330,17 +330,17 @@ jsMochaTests.MockTests = function(Y) {
 				this.expects = function(){
 					alert('expects called');
 				};
-			};
+			}
 			var bad_obj = new BadExpectsObject();
-			new Mock(bad_obj);
+			var mock = new Mock(bad_obj);
 		},
 
 		testShouldCheckTypeOfMock : function () {
-			new Mock('a string');
+			var mock = new Mock('a string');
 		},
 		
 		testShouldNotAllowFunctions : function () {
-			new Mock(function(){});
+			var mock = new Mock(function(){});
 		}
 		
 		// need to add tests for Array's and Date's as these have a typeof Object

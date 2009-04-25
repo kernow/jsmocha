@@ -7,7 +7,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 		name: "Parameters Matcher",
 		
 		setUp : function () {
-			this.get_args = function(){return(arguments)};
+			this.get_args = function(){return(arguments);};
 		},
 		
 		tearDown : function () { 
@@ -128,7 +128,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
     testShouldAcceptParameterMatchingBlock : function () {
       var args = this.get_args('a string');
      var bad_args = this.get_args('a string 2');
-     var pm = new ParametersMatcher(this.get_args(function(params){ return params[0] == 'a string' ? true : false }));
+     var pm = new ParametersMatcher(this.get_args(function(params){ return params[0] == 'a string' ? true : false; }));
      Y.Assert.isTrue(pm.match(args));
      Y.Assert.isFalse(pm.match(bad_args));
        }
@@ -141,7 +141,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
 		name: "Parameters Matcher Reports",
 		
 		setUp : function () {
-			this.get_args = function(){return(arguments)};
+			this.get_args = function(){return(arguments);};
 		},
 		
 		tearDown : function () { 
@@ -184,7 +184,7 @@ jsMochaTests.ParametersMatcherTests = function(Y) {
       var pm = new ParametersMatcher(args);
       Y.Assert.isFalse(pm.match(bad_args));
       Y.Assert.areEqual('expected ({nested_obj:{data:"string", other_data:[1, 2, 3]}, an_array:[1, 2, 3, 4, 5, 6], a_string:"string"}) but got ({nested_obj:{data:"string2", other_data:[1, 2, 3]}, an_array:[1, 2, 3, 4, 5, 6], a_string:"string"})', pm.report());
-    },
+    }
 		
 	}));
 	

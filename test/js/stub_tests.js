@@ -90,7 +90,7 @@ jsMochaTests.StubTests = function(Y) {
       var report_string = "\r\nobject: Object.a_method";
 			report_string	 += "\r\nPASS allowed any number of times invoked 5 times";
       Y.Assert.areEqual(report_string, this.mock.jsmocha.report());
-    },
+    }
 		
 	}));
 
