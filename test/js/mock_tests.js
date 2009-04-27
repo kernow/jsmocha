@@ -181,6 +181,7 @@ jsMochaTests.MockTests = function(Y) {
 		testShouldRemoveMethods : function () {
 			this.mock.jsmocha.teardown(this.mock.jsmocha);
 			Y.Assert.isUndefined(this.mock.expects);
+			Y.Assert.isUndefined(this.mock.stubs);
 			Y.Assert.isUndefined(this.mock.jsmocha);
 		}
 		
