@@ -17,6 +17,26 @@ TODO:
 Examples
 --------
 
+### Including the library
+
+To include jsMocha in your html a script tag that links to the main jsmocha file, jsMocha will take care of loading the required files
+
+    <script type="text/javascript" src="lib/jsmocha.js"></script>
+    
+If jsMocha is in a non-standard location you can specify the load path by setting the `jsmocha_load_path` variable before loading the main script
+
+    <script type="text/javascript">
+      /* set the path to the jsmocha library */
+      var jsmocha_load_path = 'some/other/path/lib/';
+    </script>
+    <script type="text/javascript" src="../lib/jsmocha.js"></script>
+
+### Platform support
+
+jsMocha has been tested on Firefox 3, Safari 4, Adobe Air and Internet Explorer 7
+
+### Using jsMocha
+
 jsMocha's syntax is designed to closely match that of Mocha's which is extremely readable. The major difference between Mocha syntax and jsMocha is `with()` parameter expectations have been changed to `passing()`, this is due to a naming conflict in JavaScript.
 
 A mocked object has the `expects()` method available and also the jsmocha object. The `verify()`, `report()` and `teardown()` methods are available through the jsmocha object to avoid naming conflicts.
