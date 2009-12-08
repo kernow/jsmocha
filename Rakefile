@@ -11,7 +11,7 @@ namespace :package do
     concatenation = secretary.concatenation
     
     # Write the concatenation to disk
-    concatenation.save_to("hth-js-lib.js")
-    puts "generated hth-js-lib.js in the root folder"
+    concatenation.save_to("jsmocha.js")
+    puts "generated jsmocha.js in the root folder"
   end
 end
