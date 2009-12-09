@@ -320,22 +320,3 @@ Screw.Unit(function() {
 
   }); // end describe
 }); // end suite
-
-
-
-
-// testSuite.add(new Y.Test.Case({
-//  
-//  name: "bad mocks",
-// 
-//  testShouldCheckTypeOfMock : function () {
-//    var mock = new Mock('a string');
-//  },
-//  
-//  testShouldNotAllowFunctions : function () {
-//    var mock = new Mock(function(){});
-//  }
-//  
-//  // need to add tests for Array's and Date's as these have a typeof Object
-//  
-// }));
