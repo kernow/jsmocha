@@ -1,6 +1,6 @@
 Screw.Unit(function() {
   
-  describe("Cardinality", function() {
+  describe("jsMocha.Cardinality", function() {
   
     it("should return instances of itself", function(){
       expect(jsMocha.Cardinality.exactly(1)).to(be_an_object);
