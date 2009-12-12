@@ -30,11 +30,11 @@ Screw.Unit(function() {
       }); // end it
     
       it("should return a sequence of data", function(){
-        this.mock.stubs('a_method').returns(1,2,3);
-        expect(this.mock.a_method()).to(equal, 1);
-        expect(this.mock.a_method()).to(equal, 2);
-        expect(this.mock.a_method()).to(equal, 3);
-        expect(this.mock.a_method()).to(equal, 3);
+        mock.stubs('a_method').returns(1,2,3);
+        expect(mock.a_method()).to(equal, 1);
+        expect(mock.a_method()).to(equal, 2);
+        expect(mock.a_method()).to(equal, 3);
+        expect(mock.a_method()).to(equal, 3);
       }); // end it
       
     }); // end describe
