@@ -136,32 +136,32 @@ You must still call the `report()`, `teardown()` or `Mock.teardown_all()` method
 
 Using the above techniques in order to mock an object and run the verification you would need to write several lines of code
 
-  var greeting = { say: function(text){ alert(text) }};
-  var mock = new Mock(greeting);
-  greeting.expects('say');
-  greeting.jsmocha.verify(); # the result would be passed to a testing framework
-  greeting.jsmocha.report(); # again the result would be passed to a testing framework to display any errors
+	var greeting = { say: function(text){ alert(text) }};
+	var mock = new Mock(greeting);
+	greeting.expects('say');
+	greeting.jsmocha.verify(); # the result would be passed to a testing framework
+	greeting.jsmocha.report(); # again the result would be passed to a testing framework to display any errors
 
 Thats far too much code, mocha has some special methods that allow you to cut down on the amount of code needed
 
-  Mock.mockerize()
+	Mock.mockerize()
   
 `mockerize()` is a neat feature that adds mocking and subbing capabilities to all objects and functions. What this means is you can call `greeting.expects('say')` without needing to tell jsMocha you want to mock it before hand. When combining this with the `Mock.mocked_objects` array it's possible to create auto setup and verification if your testing frameworks supports global before and after blocks. To achieve this with Screw.unit
 
-  Mock.mockerize();
-
-  Screw.Unit(function() {
-    after(function(){
-      $(Mock.mocked_objects).each(function(i, obj){
-        expect(obj).to(verify_to, true);
-      });
-    });
-  });
+	Mock.mockerize();
+	
+	Screw.Unit(function() {
+		after(function(){
+			$(Mock.mocked_objects).each(function(i, obj){
+				expect(obj).to(verify_to, true);
+			});
+		});
+	});
 
 This allows you to write the above test case with only 1 line of mocking code
 
-  var greeting = { say: function(text){ alert(text) }};
-  greeting.expects('say');
+	var greeting = { say: function(text){ alert(text) }};
+	greeting.expects('say');
   
 Mocking is already setup on all all objects so there is no need to initialize a new mock object and the expectations are automatically verified in Screw.unit's after block.
 
