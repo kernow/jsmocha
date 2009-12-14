@@ -41,8 +41,8 @@ To add mocking capabilities to an existing object
 	
 Or a function
 
-        var greeting = function(){ this.say = function(text){ alert(text) }};
-        var mock = new Mock(greeting);
+	var greeting = function(){ this.say = function(text){ alert(text) }};
+	var mock = new Mock(greeting);
 	
 A call to `Mock()` returns the object passed to it so in the above examples `mock` and `greeting` refer to the same thing.
 	
