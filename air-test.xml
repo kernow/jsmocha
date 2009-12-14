@@ -7,12 +7,12 @@
 	<description>jsMocha Tests</description>
 	<initialWindow>    	
 		<title>jsMocha Tests</title>
-		<content>test/acceptance.html</content>
+		<content>spec/suite.html</content>
 		<systemChrome>standard</systemChrome>
 		<transparent>false</transparent>
     <visible>true</visible>
-		<width>380</width>
-		<height>370</height>
+		<width>800</width>
+		<height>600</height>
 		<maximizable>false</maximizable>
 		<minimizable>false</minimizable>
 		<resizable>true</resizable>
