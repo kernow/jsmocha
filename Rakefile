@@ -1,8 +1,7 @@
 require 'Sprockets'
 
-namespace :package do
-  desc "Combine all javascript files into jsmocha.js"
-  task :js do
+namespace :js do
+  task :combine do
     secretary = Sprockets::Secretary.new(
       :source_files => ["lib/**/*.js"]
     )
@@ -11,7 +10,20 @@ namespace :package do
     concatenation = secretary.concatenation
     
     # Write the concatenation to disk
-    concatenation.save_to("jsmocha.js")
-    puts "generated jsmocha.js in the root folder"
+    concatenation.save_to("build/jsmocha.js")
+    puts "generated jsmocha.js in the build directory"
   end
+  
+  task :compress do
+    executable = File.join(File.dirname(__FILE__), 'vendor', 'closure', 'compiler.jar')
+    `java -jar #{executable} --js=build/jsmocha.js --js_output_file=build/jsmocha-min.js`
+    puts "generated jsmocha-min.js in the build directory"
+  end
+  
+  task :create_build_dir do
+    FileUtils.mkdir('build') unless File.exists?('build')
+  end
+  
+  desc "Combine and compress all javascript files into jsmocha.js and jsmocha-min.js"
+  task :build => [:create_build_dir, :combine, :compress]
 end
