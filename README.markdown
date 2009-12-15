@@ -1,7 +1,7 @@
 jsMocha
 =======
 
-[jsMocha](http://kernowsoul.com/page/jsmocha) is a JavaScript mocking library inspired by the [Ruby Mocha Gem](http://mocha.rubyforge.org). It's designed to be test framework agnostic so should work with most testing frameworks. jsMocha was written by [Jamie Dyer](http://kernowsoul.com) while working at [Jiva Technology](http://jivatechnology.com).
+[jsMocha](http://kernowsoul.com/page/jsmocha) is a JavaScript mocking library inspired by the [Ruby Mocha Gem](http://mocha.rubyforge.org). It's my belief that testing frameworks should not include mocking functionality, therefore jsMocha's been designed to be as agnostic as possible and should work with most testing frameworks and JavaScript libraries allowing you to switch between testing frameworks and JavaScript libraries without having to be concerned with compatibility issues. jsMocha was written by [Jamie Dyer](http://kernowsoul.com) while working at [Jiva Technology](http://jivatechnology.com) and is release under the [MIT license](http://www.opensource.org/licenses/mit-license.php).
 
 Download
 --------
