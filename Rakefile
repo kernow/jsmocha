@@ -3,7 +3,7 @@ require 'Sprockets'
 namespace :js do
   task :combine do
     secretary = Sprockets::Secretary.new(
-      :source_files => ["lib/**/*.js"]
+      :source_files => ["lib/jsmocha.js", "lib/jsmocha/*.js"]
     )
     
     # Generate a Sprockets::Concatenation object from the source files
