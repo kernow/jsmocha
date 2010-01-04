@@ -108,6 +108,22 @@ Screw.Unit(function() {
         mock.a_method('a string', 1, 'another string');
         expect(mock.jsmocha.verify()).to(be_true);
       }); // end it
+      
+      it("should fail validation when using a matching block when calling the mock multiple times", function(){
+        mock.expects('a_method').times(3).passing(function(p){ return p[0] == 'a string' ? true : false; });
+        mock.a_method('a string', 1, 'another string');
+        mock.a_method('a string 2', 1, 'another string');
+        mock.a_method('a string', 1, 'another string');
+        expect(mock.jsmocha.verify()).to(be_false);
+      }); // end it
+      
+      it("should fail validation when invoking multiple times", function(){
+        mock.expects('a_method').times(3).passing(1);
+        mock.a_method(1);
+        mock.a_method(2);
+        mock.a_method(1);
+        expect(mock.jsmocha.verify()).to(be_false);
+      }); // end it
     }); // end describe
     
     describe("returns", function() {

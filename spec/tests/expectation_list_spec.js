@@ -62,7 +62,6 @@ Screw.Unit(function() {
       mock.jsmocha.verify();
       var expected_fail_str = "\r\nobject: Object.a_method";
       expected_fail_str  += "\r\nFAIL wrong number of invocations, expected exactly once invoked no times";
-      expected_fail_str  += "\r\nFAIL expected (\"a string\") but got (undefined)";
       expect(mock.jsmocha.expectations.reports()).to(equal, expected_fail_str);
       mock.a_method();
       mock.jsmocha.verify();
