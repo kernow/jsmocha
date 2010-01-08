@@ -79,6 +79,12 @@ Screw.Unit(function() {
         expect(mock.jsmocha.verify()).to(be_false);
       }); // end it
       
+      it("should fail validation an extra parameter is passed", function(){
+        mock.expects('a_method').passing('a string');
+        mock.a_method('a string', 'another string');
+        expect(mock.jsmocha.verify()).to(be_false);
+      }); // end it
+      
       it("should fail validation when different params passed", function(){
         mock.expects('a_method').passing('a string');
         mock.a_method('another string');
