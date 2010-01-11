@@ -4,32 +4,28 @@ Screw.Unit(function() {
   
     var expectation_list;
     var mock;
-    var expectation1;
-    var expectation2;
   
     before(function(){
       expectation_list = new jsMocha.ExpectationList();
 			mock = new Mock();
-			expectation1 = new jsMocha.Expectation(mock.jsmocha, 'a_method');
-			expectation2 = new jsMocha.Expectation(mock.jsmocha, 'another_method');
     });
     
     after(function(){
       expectation_list = null;
 			mock = null;
-			expectation1 = null;
-			expectation2 = null;
     });
   
     it("should be an array", function(){
-			expect(expectation_list.expectations).to(be_an_array);
+			expect(expectation_list.expectations).to(be_an_object);
     }); // end it
     
     it("should be able to add expectations", function(){
-      expectation_list.add(expectation1);
-      expect(expectation_list.expectations.length).to(equal, 1);
-      expectation_list.add(expectation2);
-      expect(expectation_list.expectations.length).to(equal, 2);
+      expectation_list.add(mock, 'a_method');
+      expect(expectation_list.expectations['a_method'].length).to(equal, 1);
+      expectation_list.add(mock, 'a_method');
+      expect(expectation_list.expectations['a_method'].length).to(equal, 2);
+      expectation_list.add(mock, 'another_method');
+      expect(expectation_list.expectations['another_method'].length).to(equal, 1);
     }); // end it
     
     it("should be able to verify all expectations", function(){
@@ -38,7 +34,7 @@ Screw.Unit(function() {
       expect(mock.jsmocha.verify()).to(be_true);
     }); // end it
     
-    it("should be able to check all expectations", function(){
+    it("should return false if array contains a false, otherwise true", function(){
       mock.expects('a_method');
       expect(mock.jsmocha.expectations.all_passed([true,true,true])).to(be_true);
       expect(mock.jsmocha.expectations.all_passed([true])).to(be_true);
