@@ -45,7 +45,8 @@ Screw.Unit(function() {
         mock.stubs('a_method');
         mock.jsmocha.verify();
         var report_string = "\r\nobject: Object.a_method";
-        report_string  += "\r\nPASS allowed any number of times invoked no times";
+        report_string += "\r\nINFO called 0 time(s)";
+        report_string += "\r\nPASS allowed any number of times invoked no times";
         expect(mock.jsmocha.report()).to(equal, report_string);
       }); // end it
       
@@ -54,6 +55,7 @@ Screw.Unit(function() {
         mock.a_method();
         mock.jsmocha.verify();
         var report_string = "\r\nobject: Object.a_method";
+        report_string  += "\r\nINFO called 1 time(s)";
         report_string  += "\r\nPASS allowed any number of times invoked once";
         expect(mock.jsmocha.report()).to(equal, report_string);
       }); // end it
@@ -64,6 +66,7 @@ Screw.Unit(function() {
         mock.a_method();
         mock.jsmocha.verify();
         var report_string = "\r\nobject: Object.a_method";
+        report_string  += "\r\nINFO called 2 time(s)";
         report_string  += "\r\nPASS allowed any number of times invoked twice";
         expect(mock.jsmocha.report()).to(equal, report_string);
       }); // end it
@@ -77,6 +80,7 @@ Screw.Unit(function() {
         mock.a_method();
         mock.jsmocha.verify();
         var report_string = "\r\nobject: Object.a_method";
+        report_string  += "\r\nINFO called 5 time(s)";
         report_string  += "\r\nPASS allowed any number of times invoked 5 times";
         expect(mock.jsmocha.report()).to(equal, report_string);
       }); // end it

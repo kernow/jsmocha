@@ -23,17 +23,17 @@ Screw.Unit(function() {
       mock = null;
     });
   
-    it("should replace the original method", function(){
-			expect(obj.a_method()).to_not(equal, 'original method');
-    }); // end it
+      //     it("should replace the original method", function(){
+      // expect(obj.a_method()).to_not(equal, 'original method');
+      //     }); // end it
     
     it("should pass invocation verification", function(){
-      obj.a_method();
+      expectation.match();
       expect(expectation.verify()).to(be_true);
     }); // end it
     
     it("should pass params verification", function(){
-      expectation.passing('string');
+      expectation.match({ 0: 'string' });
       obj.a_method('string');
       expect(expectation.verify()).to(be_true);
     }); // end it
@@ -50,8 +50,7 @@ Screw.Unit(function() {
     
     it("should return an invocation report", function(){
       expectation.verify();
-      var report_string = "object: AnObject.a_method";
-      report_string  += "\r\nFAIL wrong number of invocations, expected exactly once invoked no times";
+      var report_string = "FAIL wrong number of invocations, expected exactly once invoked no times";
       expect(expectation.report()).to(equal, report_string);
     }); // end it
     
@@ -59,9 +58,7 @@ Screw.Unit(function() {
       expectation.passing('string');
       obj.a_method('string 2');
       expectation.verify();
-      var report_string = "object: AnObject.a_method";
-      report_string  += "\r\nPASS expected exactly once invoked once";
-      report_string  += "\r\nFAIL expected (\"string\") but got (\"string 2\")";
+      var report_string = "FAIL wrong number of invocations, expected exactly once with(\"string\") invoked no times";
       expect(expectation.report()).to(equal, report_string);
     }); // end it
     
@@ -128,6 +125,30 @@ Screw.Unit(function() {
         mock.a_method(1);
         mock.a_method(2);
         mock.a_method(1);
+        expect(mock.jsmocha.verify()).to(be_false);
+      }); // end it
+      
+      it("should pass with multiple expects on the same method", function() {
+        mock.expects('a_method').passing(1);
+        mock.expects('a_method').passing(2);
+        mock.a_method(1);
+        mock.a_method(2);
+        var passed = mock.jsmocha.verify();
+        expect(passed).to(be_true);
+      }); // end it
+      
+      it("should fail when multiple expects on the same method", function() {
+        mock.expects('a_method').passing(1);
+        mock.expects('a_method').passing(2);
+        mock.a_method(1);
+        expect(mock.jsmocha.verify()).to(be_false);
+      }); // end it
+      
+      it("should fail when multiple expects on the same method 2", function() {
+        mock.expects('a_method').passing(1);
+        mock.expects('a_method').passing(2);
+        mock.a_method(1);
+        mock.a_method(3);
         expect(mock.jsmocha.verify()).to(be_false);
       }); // end it
     }); // end describe
