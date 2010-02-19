@@ -191,6 +191,29 @@ Screw.Unit(function() {
       }); // end it
 
     }); // end describe
+    
+    
+    describe("runs", function() {
+      
+      var mock_obj;
+      var test_var = "not run";
+      
+      before(function(){
+        mock_obj = {}
+        new Mock(mock_obj);
+      });
+      
+      after(function() {
+        test_var = "not run";
+      }); // end after
+      
+      it("should run a code block when set", function() {
+        mock_obj.expects('run_callback').runs(function(){ test_var = "has run" });
+        mock_obj.run_callback();
+        expect(test_var).to(equal, "has run");
+      }); // end it
+      
+    }); // end describe
 
   }); // end describe
 }); // end suite
