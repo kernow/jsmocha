@@ -214,6 +214,49 @@ Screw.Unit(function() {
       }); // end it
       
     }); // end describe
+    
+    
+    describe("invokes_arguments", function() {
+      
+      var mock_obj;
+      var test_var  = "not run";
+      var test_var1 = "not run";
+      var test_var2 = "not run";
+      var test_var3 = "not run";
+      
+      before(function(){
+        mock_obj = {}
+        new Mock(mock_obj);
+      });
+      
+      after(function() {
+        test_var  = "not run";
+        test_var1 = "not run";
+        test_var2 = "not run";
+        test_var3 = "not run";
+      }); // end after
+      
+      it("should run the first argument as a callback", function() {
+        mock_obj.expects('run_callback').invokes_arguments(0);
+        mock_obj.run_callback(function(){ test_var = "has run" });
+        expect(test_var).to(equal, "has run");
+      }); // end it
+      
+      it("should run the second argument as a callback", function() {
+        mock_obj.expects('run_callback').invokes_arguments(1);
+        mock_obj.run_callback(1, function(){ test_var = "has run" });
+        expect(test_var).to(equal, "has run");
+      }); // end it
+      
+      it("should run multiple arguments as a callback", function() {
+        mock_obj.expects('run_callback').invokes_arguments(0,2,3);
+        mock_obj.run_callback(function(){ test_var1 = "1 has run" }, '', function(){ test_var2 = "2 has run" }, function(){ test_var3 = "3 has run" });
+        expect(test_var1).to(equal, "1 has run");
+        expect(test_var2).to(equal, "2 has run");
+        expect(test_var3).to(equal, "3 has run");
+      }); // end it
+      
+    }); // end describe
 
   }); // end describe
 }); // end suite
