@@ -12,9 +12,6 @@ Future Plans
 ------------
 
 - Integrated support for testing frameworks
-- Add parameter matching helpers
-- Add spying support
-- Add support for multiple expects with different `passing()` parameters
 
 Platform support
 ----------------
