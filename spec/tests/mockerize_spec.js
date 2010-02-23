@@ -26,15 +26,19 @@ Screw.Unit(function() {
         Mock.teardown_all();
         delete Object.prototype.expects;
         delete Object.prototype.stubs;
+        delete Object.prototype.spies;
         delete Function.prototype.expects;
         delete Function.prototype.stubs;
+        delete Function.prototype.spies;
       }); // end after
       
-      it("should add the expects and stubs methods to the function and object prototype", function() {
+      it("should add the expects, stubs and spies methods to the function and object prototype", function() {
         expect(Object.prototype.expects).to(be_a_function);
         expect(Object.prototype.stubs).to(be_a_function);
+        expect(Object.prototype.spies).to(be_a_function);
         expect(Function.prototype.expects).to(be_a_function);
         expect(Function.prototype.stubs).to(be_a_function);
+        expect(Function.prototype.spies).to(be_a_function);
       }); // end it
       
       it("should mock an object when calling expects", function() {
