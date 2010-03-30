@@ -133,6 +133,15 @@ Screw.Unit(function() {
         expect(pm.match(bad_args)).to(be_false);
       }); // end it
       
+      it("should match dates", function() {
+        var args = get_args(new Date('Tue Mar 30 2010 11:29:03 GMT+0100 (BST)'));
+        var match_args = get_args(new Date('Tue Mar 30 2010 11:29:03 GMT+0100 (BST)'));
+        var bad_args = get_args(new Date());
+        var pm = new jsMocha.ParametersMatcher(args);
+        expect(pm.match(match_args)).to(be_true);
+        expect(pm.match(bad_args)).to(be_false);
+      }); // end it
+      
     }); // end describe
     
     // describe("matcher", function() {
