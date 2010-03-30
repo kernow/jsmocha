@@ -134,10 +134,37 @@ Screw.Unit(function() {
       }); // end it
       
       it("should match dates", function() {
-        var args = get_args(new Date('Tue Mar 30 2010 11:29:03 GMT+0100 (BST)'));
-        var match_args = get_args(new Date('Tue Mar 30 2010 11:29:03 GMT+0100 (BST)'));
-        var bad_args = get_args(new Date());
-        var pm = new jsMocha.ParametersMatcher(args);
+        var args        = get_args(new Date('Tue Mar 30 2010 11:29:03 GMT+0100 (BST)'));
+        var match_args  = get_args(new Date('Tue Mar 30 2010 11:29:03 GMT+0100 (BST)'));
+        var bad_args    = get_args(new Date());
+        var pm          = new jsMocha.ParametersMatcher(args);
+        expect(pm.match(match_args)).to(be_true);
+        expect(pm.match(bad_args)).to(be_false);
+      }); // end it
+      
+      it("should match object attributes with a value of 0", function() {
+        var args        = get_args({ id: 0, something: 'else' });
+        var match_args  = get_args({ id: 0, something: 'else' });
+        var bad_args    = get_args({ id: 0, something: 'else entirely' });
+        var pm          = new jsMocha.ParametersMatcher(args);
+        expect(pm.match(match_args)).to(be_true);
+        expect(pm.match(bad_args)).to(be_false);
+      }); // end it
+      
+      it("should match object attributes with a value of false", function() {
+        var args        = get_args({ id: false, something: 'else' });
+        var match_args  = get_args({ id: false, something: 'else' });
+        var bad_args    = get_args({ id: false, something: 'else entirely' });
+        var pm          = new jsMocha.ParametersMatcher(args);
+        expect(pm.match(match_args)).to(be_true);
+        expect(pm.match(bad_args)).to(be_false);
+      }); // end it
+      
+      it("should match object attributes with a value of null", function() {
+        var args        = get_args({ id: null, something: 'else' });
+        var match_args  = get_args({ id: null, something: 'else' });
+        var bad_args    = get_args({ id: null, something: 'else entirely' });
+        var pm          = new jsMocha.ParametersMatcher(args);
         expect(pm.match(match_args)).to(be_true);
         expect(pm.match(bad_args)).to(be_false);
       }); // end it
