@@ -6,7 +6,12 @@ jsMocha
 Download
 --------
 
-Packaged download versions are available on the [github download page](http://github.com/kernow/jsmocha/downloads). If you have ruby installed and want to build your own version from source run `rake js:build` in the project folder to generate the built jsmocha.js file.
+Packaged download versions of jsMocha are available in the build folder. [A single file](http://github.com/kernow/jsmocha/raw/master/build/jsmocha.js) and [a minified version](http://github.com/kernow/jsmocha/raw/master/build/jsmocha-min.js) have been provided. If you have ruby installed and want to build your own version from source run `rake js:build` in the project folder to generate the built jsmocha.js file from source.
+
+Experimental Branch
+-------------------
+
+There is an experimental branch of jsMocha which has more features but the API will change from time to time. If you are interested in this version of jsMocha head to [the experimental branch page](http://github.com/kernow/jsmocha/tree/experimental).
 
 Future Plans
 ------------
