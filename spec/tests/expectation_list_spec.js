@@ -45,11 +45,11 @@ Screw.Unit(function() {
     
     it("should be able to add expectations", function(){
       expectation_list.add(mock, 'a_method');
-      expect(expectation_list.expectations['a_method'].expectations.length).to(equal, 1);
+      expect(expectation_list.expectations['a_method'].expectations.mock.length).to(equal, 1);
       expectation_list.add(mock, 'a_method');
-      expect(expectation_list.expectations['a_method'].expectations.length).to(equal, 2);
+      expect(expectation_list.expectations['a_method'].expectations.mock.length).to(equal, 2);
       expectation_list.add(mock, 'another_method');
-      expect(expectation_list.expectations['another_method'].expectations.length).to(equal, 1);
+      expect(expectation_list.expectations['another_method'].expectations.mock.length).to(equal, 1);
     }); // end it
     
     it("should be able to verify all expectations", function(){

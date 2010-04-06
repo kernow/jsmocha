@@ -258,5 +258,25 @@ Screw.Unit(function() {
       
     }); // end describe
 
+    describe("overwriting previous stubs/expectations/spies", function() {
+      
+      describe("an object with and existing stub", function() {
+        
+        before(function() {
+          mock.stubs('hello').returns('world');
+        }); // end before
+
+        it("should return the result of the stub", function() {
+          expect(mock.hello()).to(equal, 'world');
+        }); // end it
+        
+        it("should return the result of the expectation", function() {
+          mock.expects('hello').returns('other world');
+          expect(mock.hello()).to(equal, 'other world');
+        }); // end it
+      }); // end describe
+      
+    }); // end describe
+
   }); // end describe
 }); // end suite
