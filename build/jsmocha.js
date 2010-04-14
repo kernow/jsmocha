@@ -344,8 +344,6 @@ jsMocha.ExpectationList.prototype = {
 		}
 	},
   restore: function(method_name, expectation){
-    console.log("-- restoring expectation");
-    console.log(expectation.original_method);
     expectation.obj[method_name] = expectation.original_method;
   },
   get_name: function(mock) {
