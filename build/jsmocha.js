@@ -256,7 +256,9 @@ jsMocha.ExpectationList.prototype = {
 	},
 	replace_method: function(mock, method_name, expectation, options) {
 	  var self = this;
-   expectation.original_method = mock[method_name];
+	  if(expectation.original_method === null){
+	    expectation.original_method = mock[method_name];
+	  }
    mock[method_name] = function(){
      console.log("JSMOCHA INFO: method invoked with the parameters:");
      console.log(arguments);
@@ -290,7 +292,7 @@ jsMocha.ExpectationList.prototype = {
 		var results = [];
 		for(var key in this.expectations){
 		  if (this.expectations.hasOwnProperty(key)) {
-		    console.log("total invocations: "+this.expectations[key].invocation_count);
+		    console.log("JSMOCHA INFO: total invocations: "+this.expectations[key].invocation_count);
 		    results = this.verify_each(this.expectations[key].expectations.mock, results);
 		    results = this.verify_each(this.expectations[key].expectations.spy, results);
 		    results = this.verify_each(this.expectations[key].expectations.stub, results);
@@ -342,6 +344,8 @@ jsMocha.ExpectationList.prototype = {
 		}
 	},
   restore: function(method_name, expectation){
+    console.log("-- restoring expectation");
+    console.log(expectation.original_method);
     expectation.obj[method_name] = expectation.original_method;
   },
   get_name: function(mock) {

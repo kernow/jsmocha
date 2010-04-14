@@ -64,6 +64,17 @@ Screw.Unit(function() {
     
     describe("passing", function() {
       
+      var mock_with_method;
+      
+      before(function(){
+        mock_with_method = {
+          a_method: function(){
+            return 'original';
+          }
+        };
+        var tmp = new Mock(mock_with_method);
+      });
+      
       it("should pass validation", function(){
     		mock.expects('a_method').passing('a string');
     		mock.a_method('a string');
@@ -133,8 +144,7 @@ Screw.Unit(function() {
         mock.expects('a_method').passing(2);
         mock.a_method(1);
         mock.a_method(2);
-        var passed = mock.jsmocha.verify();
-        expect(passed).to(be_true);
+        expect(mock.jsmocha.verify()).to(be_true);
       }); // end it
       
       it("should fail when multiple expects on the same method", function() {
@@ -151,6 +161,17 @@ Screw.Unit(function() {
         mock.a_method(3);
         expect(mock.jsmocha.verify()).to(be_false);
       }); // end it
+      
+      it("should correctly teardown when multiple using multiple expects on the same method", function() {
+        expect(mock_with_method.a_method()).to(equal, 'original');
+        mock_with_method.expects('a_method').passing(1).returns('mocked');
+        mock_with_method.expects('a_method').passing(2).returns('mocked');
+        expect(mock_with_method.a_method(1)).to(equal, 'mocked');
+        expect(mock_with_method.a_method(2)).to(equal, 'mocked');
+        expect(mock_with_method.jsmocha.verify()).to(be_true);
+        mock_with_method.jsmocha.teardown();
+        expect(mock_with_method.a_method()).to(equal, 'original');
+      }); // end it
     }); // end describe
     
     describe("returns", function() {
@@ -163,7 +184,7 @@ Screw.Unit(function() {
             return 'original';
           }
         };
-        new Mock(mock_with_method);
+        var tmp = new Mock(mock_with_method);
       });
       
       it("should return values specified in the returns call", function(){
@@ -199,8 +220,8 @@ Screw.Unit(function() {
       var test_var = "not run";
       
       before(function(){
-        mock_obj = {}
-        new Mock(mock_obj);
+        mock_obj = {};
+        var tmp = new Mock(mock_obj);
       });
       
       after(function() {
@@ -208,7 +229,7 @@ Screw.Unit(function() {
       }); // end after
       
       it("should run a code block when set", function() {
-        mock_obj.expects('run_callback').runs(function(){ test_var = "has run" });
+        mock_obj.expects('run_callback').runs(function(){ test_var = "has run"; });
         mock_obj.run_callback();
         expect(test_var).to(equal, "has run");
       }); // end it
@@ -225,8 +246,8 @@ Screw.Unit(function() {
       var test_var3 = "not run";
       
       before(function(){
-        mock_obj = {}
-        new Mock(mock_obj);
+        mock_obj = {};
+        var tmp = new Mock(mock_obj);
       });
       
       after(function() {
@@ -238,19 +259,19 @@ Screw.Unit(function() {
       
       it("should run the first argument as a callback", function() {
         mock_obj.expects('run_callback').invokes_arguments(0);
-        mock_obj.run_callback(function(){ test_var = "has run" });
+        mock_obj.run_callback(function(){ test_var = "has run"; });
         expect(test_var).to(equal, "has run");
       }); // end it
       
       it("should run the second argument as a callback", function() {
         mock_obj.expects('run_callback').invokes_arguments(1);
-        mock_obj.run_callback(1, function(){ test_var = "has run" });
+        mock_obj.run_callback(1, function(){ test_var = "has run"; });
         expect(test_var).to(equal, "has run");
       }); // end it
       
       it("should run multiple arguments as a callback", function() {
         mock_obj.expects('run_callback').invokes_arguments(0,2,3);
-        mock_obj.run_callback(function(){ test_var1 = "1 has run" }, '', function(){ test_var2 = "2 has run" }, function(){ test_var3 = "3 has run" });
+        mock_obj.run_callback(function(){ test_var1 = "1 has run"; }, '', function(){ test_var2 = "2 has run"; }, function(){ test_var3 = "3 has run"; });
         expect(test_var1).to(equal, "1 has run");
         expect(test_var2).to(equal, "2 has run");
         expect(test_var3).to(equal, "3 has run");
