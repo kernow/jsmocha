@@ -55,11 +55,23 @@ jsMocha.Cardinality = new function() {
         return new Cardinality(0, number);
     };
 };
+jsMocha.console = {
+  log: function(a){
+    if(typeof window.console != 'undefined'){
+      console.log(a);
+    }
+  },
+  warn: function(a){
+    if(typeof window.console != 'undefined'){
+      console.log(a);
+    }
+  }
+};
 jsMocha.Expectation = function(mock, method_name) {
 	this.mock = mock;
 	var obj = this.existing_expecation(method_name);
   if(obj){
-    console.log("ARRRRRG, trying you mock twice you be!");
+    jsMocha.console.log("ARRRRRG, trying you mock twice you be!");
     obj.has_existing_expectation = true;
     obj.once();
     return obj;
@@ -260,8 +272,8 @@ jsMocha.ExpectationList.prototype = {
 	    expectation.original_method = mock[method_name];
 	  }
    mock[method_name] = function(){
-     console.log("JSMOCHA INFO: method invoked with the parameters:");
-     console.log(arguments);
+     jsMocha.console.log("JSMOCHA INFO: method invoked with the parameters:");
+     jsMocha.console.log(arguments);
      expectation.invocation_count += 1;
      var matched_expectation = self.check_for_matches(expectation.expectations.mock, arguments);
      if(matched_expectation === false){
@@ -292,7 +304,7 @@ jsMocha.ExpectationList.prototype = {
 		var results = [];
 		for(var key in this.expectations){
 		  if (this.expectations.hasOwnProperty(key)) {
-		    console.log("JSMOCHA INFO: total invocations: "+this.expectations[key].invocation_count);
+		    jsMocha.console.log("JSMOCHA INFO: total invocations: "+this.expectations[key].invocation_count);
 		    results = this.verify_each(this.expectations[key].expectations.mock, results);
 		    results = this.verify_each(this.expectations[key].expectations.spy, results);
 		    results = this.verify_each(this.expectations[key].expectations.stub, results);
@@ -399,9 +411,9 @@ var Match = {
   },
 
   type: function(o) {
-    console.warn();
-    console.warn(Match.TYPES[typeof o]);
-    console.warn(Match.TYPES[Match.TOSTRING.call(o)]);
+    jsMocha.console.warn();
+    jsMocha.console.warn(Match.TYPES[typeof o]);
+    jsMocha.console.warn(Match.TYPES[Match.TOSTRING.call(o)]);
     return Match.TYPES[typeof o] || Match.TYPES[Match.TOSTRING.call(o)] || (o ? Match.OBJECT : Match.NULL);
   }
 };
@@ -607,7 +619,7 @@ jsMocha.ParametersMatcher.prototype = {
 	  var len = this.expected_parameters.length;
 		for(var i = 0; i <= len; i++){
       if(Match.is_a_method_of(this.expected_parameters[i])){
-        console.warn("not running regular matcher");
+        jsMocha.console.warn("not running regular matcher");
         if(!this.expected_parameters[i](actual_parameters[i])){
           return false;
         }
@@ -621,10 +633,10 @@ jsMocha.ParametersMatcher.prototype = {
 	equal: function(expected, actual, recursion_level) {
 	  recursion_level = recursion_level || 0;
 	  if(recursion_level > this.serialize_stack_limit){
-	    console.warn('object too complex to fully match');
+	    jsMocha.console.warn('object too complex to fully match');
 	    return true;
     }
-	  console.warn("running regular matcher");
+	  jsMocha.console.warn("running regular matcher");
     if(expected instanceof Array) {
       for(var i = 0; i < actual.length; i++) {
         if(!this.equal(expected[i], actual[i], (recursion_level+1))){ return false; }
