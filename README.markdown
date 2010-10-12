@@ -13,13 +13,11 @@ Experimental Branch
 
 There is an experimental branch of jsMocha which has more features but the API will change from time to time. If you are interested in this version of jsMocha head to [the experimental branch page](http://github.com/kernow/jsmocha/tree/experimental).
 
+
 Future Plans
 ------------
 
 - Integrated support for testing frameworks
-- Add parameter matching helpers
-- Add spying support
-- Add support for multiple expects with different `passing()` parameters
 
 Platform support
 ----------------

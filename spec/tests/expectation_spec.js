@@ -23,17 +23,17 @@ Screw.Unit(function() {
       mock = null;
     });
   
-    it("should replace the original method", function(){
-			expect(obj.a_method()).to_not(equal, 'original method');
-    }); // end it
+      //     it("should replace the original method", function(){
+      // expect(obj.a_method()).to_not(equal, 'original method');
+      //     }); // end it
     
     it("should pass invocation verification", function(){
-      obj.a_method();
+      expectation.match();
       expect(expectation.verify()).to(be_true);
     }); // end it
     
     it("should pass params verification", function(){
-      expectation.passing('string');
+      expectation.match({ 0: 'string' });
       obj.a_method('string');
       expect(expectation.verify()).to(be_true);
     }); // end it
@@ -50,8 +50,7 @@ Screw.Unit(function() {
     
     it("should return an invocation report", function(){
       expectation.verify();
-      var report_string = "object: AnObject.a_method";
-      report_string  += "\r\nFAIL wrong number of invocations, expected exactly once invoked no times";
+      var report_string = "FAIL wrong number of invocations, expected exactly once invoked no times";
       expect(expectation.report()).to(equal, report_string);
     }); // end it
     
@@ -59,13 +58,22 @@ Screw.Unit(function() {
       expectation.passing('string');
       obj.a_method('string 2');
       expectation.verify();
-      var report_string = "object: AnObject.a_method";
-      report_string  += "\r\nPASS expected exactly once invoked once";
-      report_string  += "\r\nFAIL expected (\"string\") but got (\"string 2\")";
+      var report_string = "FAIL wrong number of invocations, expected exactly once with(\"string\") invoked no times";
       expect(expectation.report()).to(equal, report_string);
     }); // end it
     
     describe("passing", function() {
+      
+      var mock_with_method;
+      
+      before(function(){
+        mock_with_method = {
+          a_method: function(){
+            return 'original';
+          }
+        };
+        var tmp = new Mock(mock_with_method);
+      });
       
       it("should pass validation", function(){
     		mock.expects('a_method').passing('a string');
@@ -130,6 +138,40 @@ Screw.Unit(function() {
         mock.a_method(1);
         expect(mock.jsmocha.verify()).to(be_false);
       }); // end it
+      
+      it("should pass with multiple expects on the same method", function() {
+        mock.expects('a_method').passing(1);
+        mock.expects('a_method').passing(2);
+        mock.a_method(1);
+        mock.a_method(2);
+        expect(mock.jsmocha.verify()).to(be_true);
+      }); // end it
+      
+      it("should fail when multiple expects on the same method", function() {
+        mock.expects('a_method').passing(1);
+        mock.expects('a_method').passing(2);
+        mock.a_method(1);
+        expect(mock.jsmocha.verify()).to(be_false);
+      }); // end it
+      
+      it("should fail when multiple expects on the same method 2", function() {
+        mock.expects('a_method').passing(1);
+        mock.expects('a_method').passing(2);
+        mock.a_method(1);
+        mock.a_method(3);
+        expect(mock.jsmocha.verify()).to(be_false);
+      }); // end it
+      
+      it("should correctly teardown when multiple using multiple expects on the same method", function() {
+        expect(mock_with_method.a_method()).to(equal, 'original');
+        mock_with_method.expects('a_method').passing(1).returns('mocked');
+        mock_with_method.expects('a_method').passing(2).returns('mocked');
+        expect(mock_with_method.a_method(1)).to(equal, 'mocked');
+        expect(mock_with_method.a_method(2)).to(equal, 'mocked');
+        expect(mock_with_method.jsmocha.verify()).to(be_true);
+        mock_with_method.jsmocha.teardown();
+        expect(mock_with_method.a_method()).to(equal, 'original');
+      }); // end it
     }); // end describe
     
     describe("returns", function() {
@@ -142,7 +184,7 @@ Screw.Unit(function() {
             return 'original';
           }
         };
-        new Mock(mock_with_method);
+        var tmp = new Mock(mock_with_method);
       });
       
       it("should return values specified in the returns call", function(){
@@ -169,6 +211,92 @@ Screw.Unit(function() {
         expect(mock_with_method.a_method()).to(equal, 'mocked4');
       }); // end it
 
+    }); // end describe
+    
+    
+    describe("runs", function() {
+      
+      var mock_obj;
+      var test_var = "not run";
+      
+      before(function(){
+        mock_obj = {};
+        var tmp = new Mock(mock_obj);
+      });
+      
+      after(function() {
+        test_var = "not run";
+      }); // end after
+      
+      it("should run a code block when set", function() {
+        mock_obj.expects('run_callback').runs(function(){ test_var = "has run"; });
+        mock_obj.run_callback();
+        expect(test_var).to(equal, "has run");
+      }); // end it
+      
+    }); // end describe
+    
+    
+    describe("invokes_arguments", function() {
+      
+      var mock_obj;
+      var test_var  = "not run";
+      var test_var1 = "not run";
+      var test_var2 = "not run";
+      var test_var3 = "not run";
+      
+      before(function(){
+        mock_obj = {};
+        var tmp = new Mock(mock_obj);
+      });
+      
+      after(function() {
+        test_var  = "not run";
+        test_var1 = "not run";
+        test_var2 = "not run";
+        test_var3 = "not run";
+      }); // end after
+      
+      it("should run the first argument as a callback", function() {
+        mock_obj.expects('run_callback').invokes_arguments(0);
+        mock_obj.run_callback(function(){ test_var = "has run"; });
+        expect(test_var).to(equal, "has run");
+      }); // end it
+      
+      it("should run the second argument as a callback", function() {
+        mock_obj.expects('run_callback').invokes_arguments(1);
+        mock_obj.run_callback(1, function(){ test_var = "has run"; });
+        expect(test_var).to(equal, "has run");
+      }); // end it
+      
+      it("should run multiple arguments as a callback", function() {
+        mock_obj.expects('run_callback').invokes_arguments(0,2,3);
+        mock_obj.run_callback(function(){ test_var1 = "1 has run"; }, '', function(){ test_var2 = "2 has run"; }, function(){ test_var3 = "3 has run"; });
+        expect(test_var1).to(equal, "1 has run");
+        expect(test_var2).to(equal, "2 has run");
+        expect(test_var3).to(equal, "3 has run");
+      }); // end it
+      
+    }); // end describe
+
+    describe("overwriting previous stubs/expectations/spies", function() {
+      
+      describe("an object with and existing stub", function() {
+        
+        before(function() {
+          mock.stubs('hello').returns('world');
+        }); // end before
+
+        it("should return the result of the stub", function() {
+          expect(mock.hello()).to(equal, 'world');
+        }); // end it
+        
+        it("should return the result of the expectation", function() {
+          mock.expects('hello').returns('other world');
+          expect(mock.hello()).to(equal, 'other world');
+        }); // end it
+      }); // end describe
+      
     }); // end describe
 
   }); // end describe
