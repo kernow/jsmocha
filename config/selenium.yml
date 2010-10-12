@@ -1,0 +1,79 @@
+# Default firefox
+firefox: &defaults
+  # URL of Selenium RC server:
+  selenium_server_address: "saucelabs.com"
+  selenium_server_port: "4444"
+  # Saucelabs credentials / Browser to drive
+  saucelabs_username: "CHANGEME"
+  saucelabs_access_key: "CHANGEME"
+  saucelabs_browser_os: "Windows 2003"
+  saucelabs_browser: "firefox"
+  saucelabs_browser_version: "3."
+  saucelabs_max_duration_seconds: 1800
+  # Selenium RC browser connects to and tests the app at this URL:
+  application_address: "testhost.com" # this will be ovewritten if tunnel_method == :saucetunnel
+  application_port: 80                # this will be ovewritten by Jasmine::Config
+  # App host is actually a tunnel that tunnels from <application_address>:<application_port> to localhost:<tunnel_to_localhost_port>
+  tunnel_method: :saucetunnel
+  tunnel_to_localhost_port: 8888      # this will be ovewritten by Jasmine::Config
+  tunnel_startup_timeout: 240
+
+firefox_2_0:
+  <<: *defaults
+  saucelabs_browser: "firefox"
+  saucelabs_browser_version: "2.0."
+  
+firefox_3_0:
+  <<: *defaults
+  saucelabs_browser: "firefox"
+  saucelabs_browser_version: "3.0."
+
+firefox_3_5:
+  <<: *defaults
+  saucelabs_browser: "firefox"
+  saucelabs_browser_version: "3.5."
+
+firefox_3_6:
+  <<: *defaults
+  saucelabs_browser: "firefox"
+  saucelabs_browser_version: "3.6."
+
+googlechrome:
+  <<: *defaults
+  saucelabs_browser: "googlechrome"
+  saucelabs_browser_version: ""
+
+ie_6:
+  <<: *defaults
+  saucelabs_browser: "iexplore"
+  saucelabs_browser_version: "6."
+
+ie_7:
+  <<: *defaults
+  saucelabs_browser: "iexplore"
+  saucelabs_browser_version: "7."
+  
+ie_8:
+  <<: *defaults
+  saucelabs_browser: "iexplore"
+  saucelabs_browser_version: "8."
+
+opera_9:
+  <<: *defaults
+  saucelabs_browser: "opera"
+  saucelabs_browser_version: "9."
+
+opera_10:
+  <<: *defaults
+  saucelabs_browser: "opera"
+  saucelabs_browser_version: "10."
+
+safari_3:
+  <<: *defaults
+  saucelabs_browser: "safari"
+  saucelabs_browser_version: "3."
+
+safari_4:
+  <<: *defaults
+  saucelabs_browser: "safari"
+  saucelabs_browser_version: "4."
