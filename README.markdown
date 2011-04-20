@@ -22,7 +22,26 @@ Future Plans
 Platform support
 ----------------
 
-jsMocha has been tested on Firefox 3, Safari 4, Google Chrome and Adobe Air. Internet Explorer 8 is supported, however the mockerize feature is currently unsupported.
+jsMocha has been tested on:
+
+- Firefox 2.0
+- Firefox 3.0
+- Firefox 3.5
+- Firefox 3.6
+- Firefox 4.0
+- Google Chrome
+- Safari 3
+- Safari 4
+- Safari 5
+- Opera 9
+- Opera 10
+- Opera 11
+- IE 6
+- IE 7
+- IE 8
+- Adobe Air
+
+Internet Explorer 6,7 and 8 are supported, however the mockerize feature is currently unsupported.
 
 Using jsMocha
 -------------
