@@ -11,7 +11,7 @@
 #   - dist/**/*.js
 #
 src_files:
-  - vendor/jquery/*.js
+  - vendor/jquery/jquery-1.6.2.js
   - lib/**/*.js
 
 # stylesheets
