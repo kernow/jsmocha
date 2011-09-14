@@ -273,7 +273,7 @@ jsMocha.ExpectationList.prototype = {
 	  }
    mock[method_name] = function(){
      jsMocha.console.log("JSMOCHA INFO: method invoked with the parameters:");
-     jsMocha.console.log(arguments);
+     jsMocha.console.log(jsMocha.utility.extend(true, [], arguments));
      expectation.invocation_count += 1;
      var matched_expectation = self.check_for_matches(expectation.expectations.mock, arguments);
      if(matched_expectation === false){
@@ -579,6 +579,7 @@ Mock.prototype = {
 		delete this.mock.jsmocha;
 	}
 };
+/*global jsMocha: false */
 jsMocha.ParametersMatcher = function(expected_parameters) {
 	this.expected_parameters = expected_parameters;
 	this.serialize_stack_limit = 4;
@@ -754,4 +755,75 @@ jsMocha.ParametersMatcher.prototype = {
         return 'UNKNOWN';
     }
   }
+};
+/*global jsMocha: false */
+
+
+jsMocha.utility = {
+
+  isFunction: function( obj ) {
+		return Object.prototype.toString.call(obj) === "[object Function]";
+	},
+
+	isArray: function( obj ) {
+		return Object.prototype.toString.call(obj) === "[object Array]";
+	},
+
+	isPlainObject: function( obj ) {
+		if ( !obj || Object.prototype.toString.call(obj) !== "[object Object]" || obj.nodeType || obj.setInterval ) {
+			return false;
+		}
+
+		if ( obj.constructor
+			&& !Object.prototype.hasOwnProperty.call(obj, "constructor")
+			&& !Object.prototype.hasOwnProperty.call(obj.constructor.prototype, "isPrototypeOf") ) {
+			return false;
+		}
+
+
+		var key;
+		for ( key in obj ) {}
+
+		return key === undefined || Object.prototype.hasOwnProperty.call( obj, key );
+	},
+
+  extend: function() {
+    var target = arguments[0] || {}, i = 1, length = arguments.length, deep = false, options, name, src, copy;
+
+    if ( typeof target === "boolean" ) {
+      deep = target;
+      target = arguments[1] || {};
+      i = 2;
+    }
+
+    if ( typeof target !== "object" && !jsMocha.utility.isFunction(target) ) {
+      target = {};
+    }
+
+    for ( ; i < length; i++ ) {
+      if ( (options = arguments[ i ]) != null ) {
+        for ( name in options ) {
+          src = target[ name ];
+          copy = options[ name ];
+
+          if ( target === copy ) {
+            continue;
+          }
+
+          if ( deep && copy && ( jsMocha.utility.isPlainObject(copy) || jsMocha.utility.isArray(copy) ) ) {
+            var clone = src && ( jsMocha.utility.isPlainObject(src) || jsMocha.utility.isArray(src) ) ? src
+              : jsMocha.utility.isArray(copy) ? [] : {};
+
+            target[ name ] = jsMocha.utility.extend( deep, clone, copy );
+
+          } else if ( copy !== undefined ) {
+            target[ name ] = copy;
+          }
+        }
+      }
+    }
+
+    return target;
+  }
+
 };
