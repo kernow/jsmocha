@@ -1,18 +1,19 @@
 var jsMocha = {};
+/*global jsMocha: false */
 jsMocha.Cardinality = new function() {
     function Cardinality(required, maximum) {
         this.required = required;
         this.maximum = maximum;
 
         this.verify = function(invocation_count) {
-      		return invocation_count >= this.required && invocation_count <= this.maximum ? true : false;
-      	};
+          return invocation_count >= this.required && invocation_count <= this.maximum ? true : false;
+        };
 
-      	this.allowed_any_number_of_times = function() {
+        this.allowed_any_number_of_times = function() {
           return this.required === 0 && this.maximum == Infinity ? true : false;
         };
 
-      	this.inspect = function() {
+        this.inspect = function() {
           if(this.allowed_any_number_of_times()){
             return "allowed any number of times";
           }
@@ -55,6 +56,7 @@ jsMocha.Cardinality = new function() {
         return new Cardinality(0, number);
     };
 };
+/*global jsMocha: false, console: false */
 jsMocha.console = {
   log: function(a){
     if(typeof window.console != 'undefined'){
@@ -67,9 +69,10 @@ jsMocha.console = {
     }
   }
 };
+/*global jsMocha: false */
 jsMocha.Expectation = function(mock, method_name) {
-	this.mock = mock;
-	var obj = this.existing_expecation(method_name);
+  this.mock = mock;
+  var obj = this.existing_expecation(method_name);
   if(obj){
     jsMocha.console.log("ARRRRRG, trying you mock twice you be!");
     obj.has_existing_expectation = true;
@@ -80,197 +83,198 @@ jsMocha.Expectation = function(mock, method_name) {
     this.has_existing_expectation = false;
     this.once();
   }
-	this.method_name = method_name;
-	this.actual_parameters = null;
-	this.invocation_count = 0;
-	this.local_report = [];
-	this.return_values = null;
-	this.valid = true;
-	this.callback = null;
-	this.callback_arguments = [];
+  this.method_name = method_name;
+  this.actual_parameters = null;
+  this.invocation_count = 0;
+  this.local_report = [];
+  this.return_values = null;
+  this.valid = true;
+  this.callback = null;
+  this.callback_arguments = [];
 };
 
 jsMocha.Expectation.prototype = {
 
-	times: function(number) {
-		this.cardinality = jsMocha.Cardinality.exactly(number);
-		return this;
-	},
-	once: function() {
-	  if(this.has_existing_expectation){
-	    this.cardinality = jsMocha.Cardinality.exactly(this.cardinality.maximum + 1);
-	  }
-	  else{
-	    this.cardinality = jsMocha.Cardinality.exactly(1);
-	  }
-		return this;
-	},
-	twice: function() {
-		this.cardinality = jsMocha.Cardinality.exactly(2);
-		return this;
-	},
-	never: function() {
-		this.cardinality = jsMocha.Cardinality.exactly(0);
-		return this;
-	},
-	at_least: function(number) {
-		this.cardinality = jsMocha.Cardinality.at_least(number);
-		return this;
-	},
-	at_most: function(number) {
-		this.cardinality = jsMocha.Cardinality.at_most(number);
-		return this;
-	},
-	passing: function() {
-		this.parameters_matcher = new jsMocha.ParametersMatcher(arguments);
-		return this;
-	},
-	returns: function() {
-		this.return_values = arguments;
-		return this;
-	},
-	runs: function(callback) {
-	  this.callback = callback;
-		return this;
-	},
-	invokes_arguments: function() {
-	  this.callback_arguments = arguments;
-		return this;
-	},
-	should_return_something: function() {
-	  return this.return_values ? true : false;
-	},
-	existing_expecation: function(method_name) {
-	  if(this.mock.jsmocha){
-    	var len = this.mock.jsmocha.expectations.expectations.length;
-    	for(var i = 0; i < len; i++){
-    	  if(this.mock.jsmocha.expectations.expectations[i].method_name == method_name){
-    	    return this.mock.jsmocha.expectations.expectations[i];
-    	  }
-    	}
-  	}
-	},
-	match: function(args) {
-	  if(this.parameters_matcher){
-	    if(this.parameters_matcher.match(args)){
-	      this.invocation_count += 1;
-  	    return true;
-	    }
-	    else{
-	      return false;
-	    }
-	  }
-	  else{
-	    this.invocation_count += 1;
-	    return true;
-	  }
-	},
-	next_return_value: function() {
-	  var return_vals_length = this.return_values.length;
-	  if( return_vals_length == 1 ){
-	    return this.return_values[0];
-	  }
-	  else if( return_vals_length > 1 ){
-	    var return_indxed = this.invocation_count-1;
-	    if(return_indxed > return_vals_length-1){
-	      return this.return_values[return_vals_length-1];
-	    }
-	    else{
-	      return this.return_values[return_indxed];
+  times: function(number) {
+    this.cardinality = jsMocha.Cardinality.exactly(number);
+    return this;
+  },
+  once: function() {
+    if(this.has_existing_expectation){
+      this.cardinality = jsMocha.Cardinality.exactly(this.cardinality.maximum + 1);
+    }
+    else{
+      this.cardinality = jsMocha.Cardinality.exactly(1);
+    }
+    return this;
+  },
+  twice: function() {
+    this.cardinality = jsMocha.Cardinality.exactly(2);
+    return this;
+  },
+  never: function() {
+    this.cardinality = jsMocha.Cardinality.exactly(0);
+    return this;
+  },
+  at_least: function(number) {
+    this.cardinality = jsMocha.Cardinality.at_least(number);
+    return this;
+  },
+  at_most: function(number) {
+    this.cardinality = jsMocha.Cardinality.at_most(number);
+    return this;
+  },
+  passing: function() {
+    this.parameters_matcher = new jsMocha.ParametersMatcher(arguments);
+    return this;
+  },
+  returns: function() {
+    this.return_values = arguments;
+    return this;
+  },
+  runs: function(callback) {
+    this.callback = callback;
+    return this;
+  },
+  invokes_arguments: function() {
+    this.callback_arguments = arguments;
+    return this;
+  },
+  should_return_something: function() {
+    return this.return_values ? true : false;
+  },
+  existing_expecation: function(method_name) {
+    if(this.mock.jsmocha){
+      var len = this.mock.jsmocha.expectations.expectations.length;
+      for(var i = 0; i < len; i++){
+        if(this.mock.jsmocha.expectations.expectations[i].method_name == method_name){
+          return this.mock.jsmocha.expectations.expectations[i];
+        }
       }
-	  }
-	},
-	run_callbacks: function(args) {
-	  if(this.callback){
-	    this.callback();
+    }
+  },
+  match: function(args) {
+    if(this.parameters_matcher){
+      if(this.parameters_matcher.match(args)){
+        this.invocation_count += 1;
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    else{
+      this.invocation_count += 1;
+      return true;
+    }
+  },
+  next_return_value: function() {
+    var return_vals_length = this.return_values.length;
+    if( return_vals_length == 1 ){
+      return this.return_values[0];
+    }
+    else if( return_vals_length > 1 ){
+      var return_indxed = this.invocation_count-1;
+      if(return_indxed > return_vals_length-1){
+        return this.return_values[return_vals_length-1];
+      }
+      else{
+        return this.return_values[return_indxed];
+      }
+    }
+  },
+  run_callbacks: function(args) {
+    if(this.callback){
+      this.callback();
     }
     var len = this.callback_arguments.length;
     for(var i=0; i<len; i++){
       args[this.callback_arguments[i]]();
     }
-	},
-	verify: function(){
-		this.valid = true;
-		this.local_report = [];
+  },
+  verify: function(){
+    this.valid = true;
+    this.local_report = [];
 
     if(this.cardinality.verify(this.invocation_count)){
       this.set_valid(true);
-			this.add_report('PASS '+this.cardinality.inspect() + this.expected_params_report() + ' invoked '+this.cardinality.times(this.invocation_count));
-		}
-		else{
-			this.set_valid(false);
-			this.add_report('FAIL wrong number of invocations, '+this.cardinality.inspect() + this.expected_params_report() + ' invoked '+this.cardinality.times(this.invocation_count));
-		}
+      this.add_report('PASS '+this.cardinality.inspect() + this.expected_params_report() + ' invoked '+this.cardinality.times(this.invocation_count));
+    }
+    else{
+      this.set_valid(false);
+      this.add_report('FAIL wrong number of invocations, '+this.cardinality.inspect() + this.expected_params_report() + ' invoked '+this.cardinality.times(this.invocation_count));
+    }
 
-		if(this.parameters_matcher){
-			param_report = this.parameters_matcher.report();
-			if(param_report === true){
-				this.set_valid(true);
-			}
-			else{
-				this.set_valid(false);
-				this.add_report('FAIL '+param_report);
-			}
-		}
-		return(this.is_valid());
-	},
-	expected_params_report: function() {
-	  if(this.parameters_matcher){
-	    return ' with(' + this.parameters_matcher.list_parameters(this.parameters_matcher.expected_parameters) + ')';
+    if(this.parameters_matcher){
+      var param_report = this.parameters_matcher.report();
+      if(param_report === true){
+        this.set_valid(true);
+      }
+      else{
+        this.set_valid(false);
+        this.add_report('FAIL '+param_report);
+      }
+    }
+    return(this.is_valid());
+  },
+  expected_params_report: function() {
+    if(this.parameters_matcher){
+      return ' with(' + this.parameters_matcher.list_parameters(this.parameters_matcher.expected_parameters) + ')';
     }
     else{
       return '';
     }
-	},
-	set_valid: function(valid) {
-		if(this.valid !== false){
-			this.valid = valid;
-		}
-	},
-	is_valid: function() {
-		return this.valid;
-	},
-	report: function(){
-		return this.local_report.join("\r\n");
-	},
-	add_report: function(report){
-		this.local_report.push(report);
-	}
+  },
+  set_valid: function(valid) {
+    if(this.valid !== false){
+      this.valid = valid;
+    }
+  },
+  is_valid: function() {
+    return this.valid;
+  },
+  report: function(){
+    return this.local_report.join("\r\n");
+  },
+  add_report: function(report){
+    this.local_report.push(report);
+  }
 };
+/*global jsMocha: false */
 jsMocha.ExpectationList = function() {
-	this.expectations = {};
+  this.expectations = {};
 };
 
 jsMocha.ExpectationList.prototype = {
 
-	add: function(mock, method_name, options){
-	  options = options || { type: 'mock' };
-	  var expectation = new jsMocha.Expectation(mock, method_name);
-	  var local_expectation = this.find_or_create(method_name);
-	  this.store_local_expectation(local_expectation, expectation, options);
-	  this.store_mocked_object(local_expectation, mock);
+  add: function(mock, method_name, options){
+    options = options || { type: 'mock' };
+    var expectation = new jsMocha.Expectation(mock, method_name);
+    var local_expectation = this.find_or_create(method_name);
+    this.store_local_expectation(local_expectation, expectation, options);
+    this.store_mocked_object(local_expectation, mock);
     this.replace_method(mock, method_name, local_expectation, options);
-		return expectation;
-	},
-	find_or_create: function(name){
-	  if(!this.expectations[name]){
-	    this.expectations[name] = { expectations: { mock: [], spy: [], stub: [] }, obj: null, original_method: null, invocation_count: 0 };
-	  }
-	  return this.expectations[name];
-	},
-	store_local_expectation: function(local_expectation, expectation, options){
-	  local_expectation.expectations[options.type].push(expectation); // stubs always need to be last in the array
-	},
-	store_mocked_object: function(expectation, obj) {
-	  if(expectation.obj === null){
-	    expectation.obj = obj;
-	  }
-	},
-	replace_method: function(mock, method_name, expectation, options) {
-	  var self = this;
-	  if(expectation.original_method === null){
-	    expectation.original_method = mock[method_name];
-	  }
+    return expectation;
+  },
+  find_or_create: function(name){
+    if(!this.expectations[name]){
+      this.expectations[name] = { expectations: { mock: [], spy: [], stub: [] }, obj: null, original_method: null, invocation_count: 0 };
+    }
+    return this.expectations[name];
+  },
+  store_local_expectation: function(local_expectation, expectation, options){
+    local_expectation.expectations[options.type].push(expectation); // stubs always need to be last in the array
+  },
+  store_mocked_object: function(expectation, obj) {
+    if(expectation.obj === null){
+      expectation.obj = obj;
+    }
+  },
+  replace_method: function(mock, method_name, expectation, options) {
+    var self = this;
+    if(expectation.original_method === null){
+      expectation.original_method = mock[method_name];
+    }
    mock[method_name] = function(){
      jsMocha.console.log("JSMOCHA INFO: method invoked with the parameters:");
      jsMocha.console.log(jsMocha.utility.extend(true, [], arguments));
@@ -300,74 +304,75 @@ jsMocha.ExpectationList.prototype = {
     }
     return false;
   },
-	verify_all: function(){
-		var results = [];
-		for(var key in this.expectations){
-		  if (this.expectations.hasOwnProperty(key)) {
-		    jsMocha.console.log("JSMOCHA INFO: total invocations: "+this.expectations[key].invocation_count);
-		    results = this.verify_each(this.expectations[key].expectations.mock, results);
-		    results = this.verify_each(this.expectations[key].expectations.spy, results);
-		    results = this.verify_each(this.expectations[key].expectations.stub, results);
-  		}
-		}
-		return this.all_passed(results);
-	},
-	verify_each: function(expectations, results){
-	  var len = expectations.length;
-		for(var i = 0; i < len; i++){
-			results.push(expectations[i].verify());
-		}
-		return results;
-	},
-	all_passed: function(array){
-	  var len = array.length;
-		for(var i=0; i < len; i++){
-			if(array[i] === false){
-				return false;
-			}
-		}
-		return true;
-	},
-	reports: function(){
-		var results = [];
-		for(var key in this.expectations){
-		  if (this.expectations.hasOwnProperty(key)) {
-		    results.push("object: " + this.get_name(this.expectations[key].obj) + '.' + key);
-		    results.push("INFO called " + this.expectations[key].invocation_count + " time(s)");
-    		results = this.reports_for_each(this.expectations[key].expectations.mock, results);
-		    results = this.reports_for_each(this.expectations[key].expectations.spy, results);
-		    results = this.reports_for_each(this.expectations[key].expectations.stub, results);
-  		}
-		}
-		return "\r\n"+results.join("\r\n");
-	},
-	reports_for_each: function(expectations, results){
-	  var len = expectations.length;
-		for(var i = 0; i < len; i++){
-			results.push(expectations[i].report());
-		}
-		return results;
-	},
-	restore_all: function(){
-	  for(var key in this.expectations){
-		  if (this.expectations.hasOwnProperty(key)) {
-		    this.restore(key, this.expectations[key]);
-  		}
-		}
-	},
+  verify_all: function(){
+    var results = [];
+    for(var key in this.expectations){
+      if (this.expectations.hasOwnProperty(key)) {
+        jsMocha.console.log("JSMOCHA INFO: total invocations: "+this.expectations[key].invocation_count);
+        results = this.verify_each(this.expectations[key].expectations.mock, results);
+        results = this.verify_each(this.expectations[key].expectations.spy, results);
+        results = this.verify_each(this.expectations[key].expectations.stub, results);
+      }
+    }
+    return this.all_passed(results);
+  },
+  verify_each: function(expectations, results){
+    var len = expectations.length;
+    for(var i = 0; i < len; i++){
+      results.push(expectations[i].verify());
+    }
+    return results;
+  },
+  all_passed: function(array){
+    var len = array.length;
+    for(var i=0; i < len; i++){
+      if(array[i] === false){
+        return false;
+      }
+    }
+    return true;
+  },
+  reports: function(){
+    var results = [];
+    for(var key in this.expectations){
+      if (this.expectations.hasOwnProperty(key)) {
+        results.push("object: " + this.get_name(this.expectations[key].obj) + '.' + key);
+        results.push("INFO called " + this.expectations[key].invocation_count + " time(s)");
+        results = this.reports_for_each(this.expectations[key].expectations.mock, results);
+        results = this.reports_for_each(this.expectations[key].expectations.spy, results);
+        results = this.reports_for_each(this.expectations[key].expectations.stub, results);
+      }
+    }
+    return "\r\n"+results.join("\r\n");
+  },
+  reports_for_each: function(expectations, results){
+    var len = expectations.length;
+    for(var i = 0; i < len; i++){
+      results.push(expectations[i].report());
+    }
+    return results;
+  },
+  restore_all: function(){
+    for(var key in this.expectations){
+      if (this.expectations.hasOwnProperty(key)) {
+        this.restore(key, this.expectations[key]);
+      }
+    }
+  },
   restore: function(method_name, expectation){
     expectation.obj[method_name] = expectation.original_method;
   },
   get_name: function(mock) {
-	   var funcNameRegex = /function (.{1,})\(/;
-	   var results = (funcNameRegex).exec((mock).constructor.toString());
-	   return (results && results.length > 1) ? results[1] : "";
-	}
+     var funcNameRegex = /function (.{1,})\(/;
+     var results = (funcNameRegex).exec((mock).constructor.toString());
+     return (results && results.length > 1) ? results[1] : "";
+  }
 };
+/*global jsMocha: false */
 var Match = {
 
   is_a_method_of: function(method){
-    for(meth in Match){
+    for(var meth in Match){
       if(method === Match[meth]){
         return true;
       }
@@ -442,25 +447,26 @@ Match.TYPES = {
   '[object Date]'     : Match.DATE,
   '[object Error]'    : Match.ERROR
 };
+/*global jsMocha: false */
 Mock = function(object, force) {
-	var mock = object || {};
-	if(this.already_mocked(mock)){
-		return mock;
-	}
-	this.expectations = new jsMocha.ExpectationList();
-	if(this.check_for_clashes(mock) && !force){
-		throw new Error("Cannot mock object, function names clash!!");
-	}
-	var type = typeof(mock);
-	var type2 = Object.prototype.toString.call(object);
-	if((type === 'function' || type === 'object') && (type2 !== '[object Date]' && type2 !== '[object Array]')) {
-		this.add_methods_to_object(mock);
-	} else {
-		throw new Error("Cannot mock something of type: " + typeof(mock));
-	}
-	this.mock = mock;
-	Mock.mocked_objects.push(mock);
-	return mock;
+  var mock = object || {};
+  if(this.already_mocked(mock)){
+    return mock;
+  }
+  this.expectations = new jsMocha.ExpectationList();
+  if(this.check_for_clashes(mock) && !force){
+    throw new Error("Cannot mock object, function names clash!!");
+  }
+  var type = typeof(mock);
+  var type2 = Object.prototype.toString.call(object);
+  if((type === 'function' || type === 'object') && (type2 !== '[object Date]' && type2 !== '[object Array]')) {
+    this.add_methods_to_object(mock);
+  } else {
+    throw new Error("Cannot mock something of type: " + typeof(mock));
+  }
+  this.mock = mock;
+  Mock.mocked_objects.push(mock);
+  return mock;
 };
 
 Mock.mocked_objects = [];
@@ -526,28 +532,28 @@ Mock.remove_from_mocked_objects = function(obj){
 };
 
 Mock.prototype = {
-	reservedNames: ['expects', 'stubs', 'spies', 'jsmocha'],
+  reservedNames: ['expects', 'stubs', 'spies', 'jsmocha'],
 
-	already_mocked: function(object) {
-		return object.jsmocha ? true : false;
-	},
-	check_for_clashes: function(object) {
-		for( property in object ){
-			if(this.in_array(property, this.reservedNames)){
-				return true;
-			}
-		}
-	},
-	in_array: function(subject, array){
-	  var len = array.length;
-  	for(var i = 0; i < len; i++){
-  		if(subject == array[i]){
-  			return true;
-			}
-		}
-  	return false;
-	},
-	add_methods_to_object: function(object, stub) {
+  already_mocked: function(object) {
+    return object.jsmocha ? true : false;
+  },
+  check_for_clashes: function(object) {
+    for( var property in object ){
+      if(this.in_array(property, this.reservedNames)){
+        return true;
+      }
+    }
+  },
+  in_array: function(subject, array){
+    var len = array.length;
+    for(var i = 0; i < len; i++){
+      if(subject == array[i]){
+        return true;
+      }
+    }
+    return false;
+  },
+  add_methods_to_object: function(object, stub) {
     object.jsmocha = this;
     object.stubs = function(method_name){
       var expectation = this.jsmocha.expectations.add(this, method_name, { type: 'stub' });
@@ -560,24 +566,24 @@ Mock.prototype = {
     object.spies = function(method_name){
       return this.jsmocha.expectations.add(this, method_name, { type: 'spy' });
     };
-	},
-	verify: function(){
-		var result = this.expectations.verify_all();
-		return result;
-	},
-	report: function(){
-		var reports = this.expectations.reports();
-		this.teardown();
-		return reports;
-	},
-	teardown: function(skip_remove){
-	  if(!skip_remove){ Mock.remove_from_mocked_objects(this.mock); }
-		this.expectations.restore_all();
-		delete this.mock.expects;
-		delete this.mock.stubs;
-		delete this.mock.spies;
-		delete this.mock.jsmocha;
-	}
+  },
+  verify: function(){
+    var result = this.expectations.verify_all();
+    return result;
+  },
+  report: function(){
+    var reports = this.expectations.reports();
+    this.teardown();
+    return reports;
+  },
+  teardown: function(skip_remove){
+    if(!skip_remove){ Mock.remove_from_mocked_objects(this.mock); }
+    this.expectations.restore_all();
+    delete this.mock.expects;
+    delete this.mock.stubs;
+    delete this.mock.spies;
+    delete this.mock.jsmocha;
+  }
 };
 /*global jsMocha: false */
 jsMocha.ParametersMatcher = function(expected_parameters) {
